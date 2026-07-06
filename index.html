@@ -3,44 +3,85 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>FENIX S V1.0</title>
+  <title>FENIX S V1.1</title>
   <style>
     :root{
-      --bg:#07111f;--panel:#0f1b2d;--panel2:#12233a;--text:#f8fafc;
-      --muted:#94a3b8;--accent:#f59e0b;--green:#22c55e;--yellow:#facc15;
-      --red:#ef4444;--line:#28415f;--blue:#38bdf8;
+      --bg:#050b14;
+      --panel:#0e1a2b;
+      --panel2:#142843;
+      --text:#ffffff;
+      --muted:#e5e7eb;
+      --soft:#cbd5e1;
+      --accent:#f59e0b;
+      --green:#22c55e;
+      --yellow:#facc15;
+      --red:#ef4444;
+      --line:#3b587a;
+      --blue:#38bdf8;
+      --input:#061524;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-    header{position:sticky;top:0;background:#020617;padding:14px;border-bottom:1px solid var(--line);z-index:5}
-    h1{margin:0;font-size:22px;color:var(--accent)}
-    .sub{color:var(--muted);font-size:13px;margin-top:4px}
-    main{padding:14px;max-width:820px;margin:auto}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
-    .card h2{margin:0 0 10px;font-size:18px}
-    label{display:block;margin-top:10px;color:var(--muted);font-size:14px}
-    input,select,textarea,button{
-      width:100%;padding:12px;margin-top:6px;border-radius:12px;border:1px solid var(--line);
-      background:#071827;color:var(--text);font-size:16px
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:linear-gradient(180deg,#020617 0%,var(--bg) 100%);
+      color:var(--text);
+      font-size:16px;
     }
-    textarea{min-height:80px}
-    button{background:var(--accent);color:#111827;font-weight:bold;border:none;margin-top:14px}
+    header{
+      position:sticky;top:0;background:#020617;
+      padding:14px 16px;border-bottom:1px solid var(--line);z-index:5;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+    h1{margin:0;font-size:22px;color:var(--accent);letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:14px;margin-top:4px;line-height:1.35}
+    main{padding:14px;max-width:820px;margin:auto}
+    .card{
+      background:rgba(14,26,43,.96);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      margin:12px 0;
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+    }
+    .card h2{margin:0 0 12px;font-size:19px;color:#fff}
+    label{display:block;margin-top:10px;color:var(--muted);font-size:15px;font-weight:700}
+    input,select,textarea,button{
+      width:100%;padding:12px;margin-top:6px;border-radius:14px;border:1px solid var(--line);
+      background:var(--input);color:var(--text);font-size:17px;min-height:47px;
+    }
+    input::placeholder,textarea::placeholder{color:#94a3b8}
+    input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+    textarea{min-height:78px;line-height:1.35}
+    button{background:var(--accent);color:#111827;font-weight:bold;border:none;margin-top:14px;cursor:pointer}
+    button:active{transform:scale(.99)}
     .btn2{background:var(--blue);color:#04131f}
     .btn3{background:var(--green);color:#04130a}
-    .smallbtn{width:auto;padding:8px 12px;font-size:14px}
+    .smallbtn{width:auto;padding:8px 12px;font-size:14px;min-height:auto}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .hidden{display:none}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);margin:4px 4px 0 0}
+    .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+    .setup-grid .wide{grid-column:1 / -1}
+    .hidden{display:none!important}
+    .pill{display:inline-block;padding:7px 11px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);margin:4px 4px 0 0;color:#fff}
     .ok{color:var(--green)} .warn{color:var(--yellow)} .bad{color:var(--red)}
-    .score{font-size:32px;font-weight:bold;color:var(--accent)}
+    .score{font-size:34px;font-weight:bold;color:var(--accent)}
     .muted{color:var(--muted)}
+    .mini{font-size:13px;color:var(--soft);line-height:1.35;margin-top:10px}
     footer{padding:20px;text-align:center;color:var(--muted);font-size:12px}
+    @media(max-width:430px){
+      main{padding:10px}
+      .card{padding:13px;border-radius:20px}
+      .setup-grid,.grid{gap:8px}
+      input,select,textarea,button{font-size:16px;padding:10px;min-height:44px}
+      label{font-size:14px;margin-top:8px}
+      h1{font-size:21px}
+    }
   </style>
 </head>
 
 <body>
 <header>
-  <h1>🦅 FENIX S V1.0</h1>
+  <h1>🦅 FENIX S V1.1</h1>
   <div class="sub" id="topLine">Osobni dnevnik energije, oporavka i napretka</div>
 </header>
 
@@ -48,66 +89,93 @@
 
   <section class="card" id="setupCard">
     <h2>⚙️ Prvi setup</h2>
+    <div class="mini">Kompaktni unos s pojačanim kontrastom radi lakšeg čitanja.</div>
 
-    <label>Ime</label>
-    <input id="name" placeholder="npr. Siniša">
-
-    <label>Datum rođenja</label>
-    <input id="birth" type="date">
-
-    <label>Spol</label>
-    <select id="sex">
-      <option value="">Odaberi</option>
-      <option>Muško</option>
-      <option>Žensko</option>
-      <option>Ne želim navesti</option>
-    </select>
-
-    <div class="grid">
+    <div class="setup-grid">
       <div>
-        <label>Visina cm</label>
+        <label>Ime</label>
+        <input id="name" placeholder="Siniša">
+      </div>
+      <div>
+        <label>Datum rođenja</label>
+        <input id="birth" type="date">
+      </div>
+
+      <div>
+        <label>Spol</label>
+        <select id="sex">
+          <option value="">Odaberi</option>
+          <option value="M">M</option>
+          <option value="Ž">Ž</option>
+        </select>
+      </div>
+      <div>
+        <label>Cilj</label>
+        <select id="goal">
+          <option>Oporavak nakon bolesti</option>
+          <option>Više energije</option>
+          <option>Bolji san</option>
+          <option>Kondicija</option>
+          <option>Opće zdravlje</option>
+          <option>Drugo</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Visina (cm)</label>
         <input id="height" type="number" placeholder="180">
       </div>
       <div>
-        <label>Težina kg</label>
+        <label>Težina (kg)</label>
         <input id="weight" type="number" placeholder="85">
       </div>
-    </div>
 
-    <label>Cilj korištenja</label>
-    <select id="goal">
-      <option>Oporavak nakon bolesti</option>
-      <option>Više energije</option>
-      <option>Bolji san</option>
-      <option>Kondicija</option>
-      <option>Opće zdravlje</option>
-      <option>Drugo</option>
-    </select>
-
-    <label>Koristiš li smartwatch?</label>
-    <select id="smartwatch">
-      <option>Da</option>
-      <option>Ne</option>
-    </select>
-
-    <label>Vremenska zona</label>
-    <input id="timezone">
-
-    <div class="grid">
       <div>
-        <label>Vrijeme buđenja</label>
+        <label>Smartwatch</label>
+        <select id="smartwatch" onchange="toggleWatchFields()">
+          <option>Da</option>
+          <option>Ne</option>
+        </select>
+      </div>
+      <div>
+        <label>Zona</label>
+        <input id="timezone" placeholder="Europe/Zagreb">
+      </div>
+
+      <div id="watchBrandBox">
+        <label>Proizvođač</label>
+        <select id="watchBrand" onchange="updateWatchModels()">
+          <option>Garmin</option>
+          <option>Huawei</option>
+          <option>Apple</option>
+          <option>Samsung</option>
+          <option>Polar</option>
+          <option>Coros</option>
+          <option>Suunto</option>
+          <option>Drugo</option>
+        </select>
+      </div>
+      <div id="watchModelBox">
+        <label>Model</label>
+        <select id="watchModel"></select>
+      </div>
+
+      <div>
+        <label>Buđenje</label>
         <input id="wakeTime" type="time" value="06:30">
       </div>
       <div>
-        <label>Vrijeme spavanja</label>
+        <label>Spavanje</label>
         <input id="sleepTime" type="time" value="22:00">
+      </div>
+
+      <div class="wide">
+        <label>Važna napomena za FENIX S</label>
+        <textarea id="noteSetup" placeholder="npr. oporavljam se nakon bolesti..."></textarea>
       </div>
     </div>
 
-    <label>Važna napomena za FENIX S</label>
-    <textarea id="noteSetup" placeholder="npr. oporavljam se nakon bolesti..."></textarea>
-
-    <button onclick="saveSetup()">Spremi setup</button>
+    <button onclick="saveSetup()">💾 Spremi setup</button>
   </section>
 
   <section class="card hidden" id="dashboard">
@@ -128,7 +196,7 @@
     <div class="grid">
       <div><label>Body Battery sada</label><input id="bbNow" type="number" min="0" max="100"></div>
       <div><label>BB punjenje noću</label><input id="bbCharge" type="number"></div>
-      <div><label>San - ocjena 1-10</label><input id="sleepScore" type="number" min="1" max="10"></div>
+      <div><label>San 1-10</label><input id="sleepScore" type="number" min="1" max="10"></div>
       <div><label>Stres 0-100</label><input id="stress" type="number" min="0" max="100"></div>
       <div><label>Energija 1-10</label><input id="energy" type="number" min="1" max="10"></div>
       <div><label>Temperatura °C</label><input id="temp" type="number" step="0.1"></div>
@@ -188,12 +256,23 @@
 </main>
 
 <footer>
-  FENIX S V1.0 – pozitivno, jasno, s brojem i preporukom.
+  FENIX S V1.1 – jasnije, čitljivije, kompaktnije.
 </footer>
 
 <script>
 const LS_SETUP = "fenix_setup_v10";
 const LS_DAYS = "fenix_days_v10";
+
+const WATCH_MODELS = {
+  "Garmin":["Instinct 2 Solar","Instinct 2X Solar","Forerunner 165","Forerunner 255","Fenix 7","Venu","Drugo"],
+  "Huawei":["Watch GT 3","Watch GT 4","Watch Fit","Drugo"],
+  "Apple":["Apple Watch SE","Apple Watch Series","Apple Watch Ultra","Drugo"],
+  "Samsung":["Galaxy Watch","Galaxy Watch Classic","Drugo"],
+  "Polar":["Vantage","Pacer","Grit X","Drugo"],
+  "Coros":["Pace","Apex","Vertix","Drugo"],
+  "Suunto":["Suunto 9","Suunto Race","Suunto Vertical","Drugo"],
+  "Drugo":["Drugo"]
+};
 
 function todayKey(){
   const d = new Date();
@@ -214,9 +293,32 @@ function setDays(days){
   localStorage.setItem(LS_DAYS, JSON.stringify(days));
 }
 
+function val(id){ return document.getElementById(id).value; }
+function num(id){ return Number(document.getElementById(id).value || 0); }
+
+function updateWatchModels(){
+  const brand = val("watchBrand") || "Garmin";
+  const modelSelect = document.getElementById("watchModel");
+  modelSelect.innerHTML = "";
+  (WATCH_MODELS[brand] || ["Drugo"]).forEach(model => {
+    const opt = document.createElement("option");
+    opt.textContent = model;
+    opt.value = model;
+    modelSelect.appendChild(opt);
+  });
+}
+
+function toggleWatchFields(){
+  const show = val("smartwatch") === "Da";
+  document.getElementById("watchBrandBox").classList.toggle("hidden", !show);
+  document.getElementById("watchModelBox").classList.toggle("hidden", !show);
+}
+
 function init(){
   document.getElementById("timezone").value =
     Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Zagreb";
+  updateWatchModels();
+  toggleWatchFields();
 
   const setup = JSON.parse(localStorage.getItem(LS_SETUP) || "null");
 
@@ -231,7 +333,7 @@ function init(){
       `Dobro došao, ${setup.name || "prijatelju"} 🦅`;
 
     document.getElementById("todayInfo").innerText =
-      `Danas je ${todayKey()} | Zona: ${setup.timezone}`;
+      `Danas je ${todayKey()} | Zona: ${setup.timezone || "Europe/Zagreb"}`;
 
     loadToday();
     showYesterday();
@@ -247,18 +349,18 @@ function saveSetup(){
     weight: num("weight"),
     goal: val("goal"),
     smartwatch: val("smartwatch"),
+    watchBrand: val("smartwatch") === "Da" ? val("watchBrand") : "",
+    watchModel: val("smartwatch") === "Da" ? val("watchModel") : "",
     timezone: val("timezone"),
     wakeTime: val("wakeTime"),
     sleepTime: val("sleepTime"),
     note: val("noteSetup"),
+    version: "1.1",
     createdAt: new Date().toISOString()
   };
   localStorage.setItem(LS_SETUP, JSON.stringify(setup));
   location.reload();
 }
-
-function val(id){ return document.getElementById(id).value; }
-function num(id){ return Number(document.getElementById(id).value || 0); }
 
 function calculateMorningIndex(d){
   let score = 50;
@@ -439,11 +541,11 @@ function resetApp(){
     localStorage.removeItem(LS_SETUP);
     localStorage.removeItem(LS_DAYS);
     location.reload();
-  }        
+  }
 }
 
 init();
 </script>
 
 </body>
-</html>                                  
+</html>
