@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>FENIX S App V1.2</title>
+  <title>FENIX S App V1.2.1</title>
   <style>
     :root{
       --bg:#07111f;
@@ -56,7 +56,7 @@
 </head>
 <body>
 <header>
-  <h1>FENIX S App V1.2</h1>
+  <h1>FENIX S App V1.2.1</h1>
   <div class="subtitle" id="todayLabel">Dnevni unos</div>
 </header>
 
@@ -71,7 +71,7 @@
       <button class="secondary" id="showMorningBtn">Prikaži jutro</button>
       <button class="secondary" id="showEveningBtn">Prikaži večer</button>
     </div>
-    <p class="muted small">Aplikacija automatski predlaže jutarnji ili večernji prikaz prema vremenu, ali možeš ručno prebaciti.</p>
+    
   </section>
 
   <section class="card" id="morningDashboard">
@@ -83,25 +83,26 @@
       <div class="row three">
         <div>
           <label for="mEnergy">Energija ujutro (0–100)</label>
-          <input id="mEnergy" type="number" min="0" max="100" value="50" />
+          <input id="mEnergy" type="number" min="0" max="100" />
         </div>
         <div>
           <label for="mSleep">Kvaliteta sna (1–10)</label>
-          <input id="mSleep" type="number" min="1" max="10" value="5" />
+          <input id="mSleep" type="number" min="1" max="10" />
         </div>
         <div>
           <label for="mBodyBattery">Body Battery / oporavak</label>
-          <input id="mBodyBattery" type="number" min="0" max="100" value="50" />
+          <input id="mBodyBattery" type="number" min="0" max="100" />
         </div>
       </div>
       <div class="row three">
         <div>
           <label for="mStress">Stres ujutro (0–100)</label>
-          <input id="mStress" type="number" min="0" max="100" value="20" />
+          <input id="mStress" type="number" min="0" max="100" />
         </div>
         <div>
           <label for="mCramps">Grčevi noću</label>
           <select id="mCramps">
+            <option value="">odaberi</option>
             <option value="nema">nema</option>
             <option value="blagi">blagi</option>
             <option value="srednji">srednji</option>
@@ -111,6 +112,7 @@
         <div>
           <label for="mPain">Bol</label>
           <select id="mPain">
+            <option value="">odaberi</option>
             <option value="nema">nema</option>
             <option value="blaga">blaga</option>
             <option value="srednja">srednja</option>
@@ -121,11 +123,12 @@
       <div class="row two">
         <div>
           <label for="mWater">Voda jučer / do jutra (L)</label>
-          <input id="mWater" type="number" step="0.1" min="0" value="1.5" />
+          <input id="mWater" type="number" step="0.1" min="0" />
         </div>
         <div>
           <label for="mMood">Osjećaj jutra</label>
           <select id="mMood">
+            <option value="">odaberi</option>
             <option value="mirno">mirno</option>
             <option value="umorno">umorno</option>
             <option value="nestabilno">nestabilno</option>
@@ -166,15 +169,16 @@
       <div class="row three">
         <div>
           <label for="eEnergy">Energija navečer (0–100)</label>
-          <input id="eEnergy" type="number" min="0" max="100" value="40" />
+          <input id="eEnergy" type="number" min="0" max="100" />
         </div>
         <div>
           <label for="eStress">Stres dana (0–100)</label>
-          <input id="eStress" type="number" min="0" max="100" value="30" />
+          <input id="eStress" type="number" min="0" max="100" />
         </div>
         <div>
           <label for="eActivity">Aktivnost dana</label>
           <select id="eActivity">
+            <option value="">odaberi</option>
             <option value="niska">niska</option>
             <option value="umjerena">umjerena</option>
             <option value="visoka">visoka</option>
@@ -186,6 +190,7 @@
         <div>
           <label for="eCramps">Grčevi tijekom dana</label>
           <select id="eCramps">
+            <option value="">odaberi</option>
             <option value="nema">nema</option>
             <option value="blagi">blagi</option>
             <option value="srednji">srednji</option>
@@ -195,6 +200,7 @@
         <div>
           <label for="ePain">Bol</label>
           <select id="ePain">
+            <option value="">odaberi</option>
             <option value="nema">nema</option>
             <option value="blaga">blaga</option>
             <option value="srednja">srednja</option>
@@ -203,13 +209,14 @@
         </div>
         <div>
           <label for="eWater">Voda danas (L)</label>
-          <input id="eWater" type="number" step="0.1" min="0" value="1.5" />
+          <input id="eWater" type="number" step="0.1" min="0" />
         </div>
       </div>
       <div class="row two">
         <div>
           <label for="eMood">Zaključak dana</label>
           <select id="eMood">
+            <option value="">odaberi</option>
             <option value="mirno">mirno</option>
             <option value="dobro">dobro</option>
             <option value="umorno">umorno</option>
@@ -219,6 +226,7 @@
         <div>
           <label for="eSleepPlan">Plan za san</label>
           <select id="eSleepPlan">
+            <option value="">odaberi</option>
             <option value="standardno">standardno</option>
             <option value="ranije_spavanje">ranije spavanje</option>
             <option value="mirnija_vecer">mirnija večer</option>
@@ -267,9 +275,9 @@
 
 <script>
 (function(){
-  const APP_VERSION = '1.2';
-  const STORAGE_KEY = 'fenix_s_records_v1_2';
-  const SETTINGS_KEY = 'fenix_s_settings_v1_2';
+  const APP_VERSION = '1.2.1';
+  const STORAGE_KEY = 'fenix_s_records_v1_2_1';
+  const SETTINGS_KEY = 'fenix_s_settings_v1_2_1';
 
   const $ = (id) => document.getElementById(id);
 
@@ -302,14 +310,26 @@
 
   const defaults = {
     morning: {
-      mEnergy: '50', mSleep: '5', mBodyBattery: '50', mStress: '20',
-      mCramps: 'nema', mPain: 'nema', mWater: '1.5', mMood: 'mirno', mNote: ''
+      mEnergy: '', mSleep: '', mBodyBattery: '', mStress: '',
+      mCramps: '', mPain: '', mWater: '', mMood: '', mNote: ''
     },
     evening: {
-      eEnergy: '40', eStress: '30', eActivity: 'umjerena', eCramps: 'nema',
-      ePain: 'nema', eWater: '1.5', eMood: 'mirno', eSleepPlan: 'standardno', eNote: ''
+      eEnergy: '', eStress: '', eActivity: '', eCramps: '',
+      ePain: '', eWater: '', eMood: '', eSleepPlan: '', eNote: ''
     }
   };
+
+  const requiredMorning = ['mEnergy','mSleep','mBodyBattery','mStress','mCramps','mPain','mWater','mMood'];
+  const requiredEvening = ['eEnergy','eStress','eActivity','eCramps','ePain','eWater','eMood','eSleepPlan'];
+
+  function validateRequired(data, ids, label){
+    const missing = ids.filter(id => data[id] === '' || data[id] === null || typeof data[id] === 'undefined');
+    if(missing.length){
+      alert(label + ': molim unesite sva ključna polja prije spremanja.');
+      return false;
+    }
+    return true;
+  }
 
   function setFormValues(values){
     Object.entries(values).forEach(([id,val]) => { if($(id)) $(id).value = val; });
@@ -357,10 +377,10 @@
 
     if (sleep <= 4) parts.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
     if (stress >= 60) parts.push('Stres je povišen; koristi kraće pauze i jednostavniji raspored.');
-    if (m.mCramps !== 'nema') parts.push(`Noćni grčevi su zabilježeni kao ${m.mCramps}; prati vodu, opterećenje i večernji ritam.`);
+    if (m.mCramps && m.mCramps !== 'nema') parts.push(`Noćni grčevi su zabilježeni kao ${m.mCramps}; prati vodu, opterećenje i večernji ritam.`);
 
     // Važno pravilo: ako boli nema, bol se uopće ne spominje.
-    if (m.mPain !== 'nema') {
+    if (m.mPain && m.mPain !== 'nema') {
       if (m.mPain === 'blaga') parts.push('Blaga bol je zabilježena; ostani u mirnijem tempu.');
       else parts.push(`Bol je zabilježena kao ${m.mPain}; nemoj forsirati i po potrebi se konzultiraj sa stručnom osobom.`);
     }
@@ -380,10 +400,10 @@
     else parts.push('Dan je zatvoren; sada je najvažnije smirivanje ritma.');
 
     if (stress >= 60) parts.push('Stres je bio povišen, pa neka večer bude što jednostavnija.');
-    if (e.eCramps !== 'nema') parts.push(`Grčevi su zabilježeni kao ${e.eCramps}; obrati pažnju na vodu, opterećenje i opuštanje prije spavanja.`);
+    if (e.eCramps && e.eCramps !== 'nema') parts.push(`Grčevi su zabilježeni kao ${e.eCramps}; obrati pažnju na vodu, opterećenje i opuštanje prije spavanja.`);
 
     // Važno pravilo: ako boli nema, bol se uopće ne spominje.
-    if (e.ePain !== 'nema') {
+    if (e.ePain && e.ePain !== 'nema') {
       if (e.ePain === 'blaga') parts.push('Blaga bol je zabilježena; večeras bez forsiranja.');
       else parts.push(`Bol je zabilježena kao ${e.ePain}; večeras smanji opterećenje i po potrebi potraži stručni savjet.`);
     }
@@ -489,6 +509,7 @@
     const records = loadRecords();
     if(!records[today]) records[today] = {};
     const data = getFormValues(Object.keys(defaults.morning));
+    if(!validateRequired(data, requiredMorning, 'Jutarnji unos')) return;
     records[today].morning = data;
     records[today].morningComment = buildMorningComment(data);
     records[today].updatedAt = new Date().toISOString();
@@ -503,6 +524,7 @@
     const records = loadRecords();
     if(!records[today]) records[today] = {};
     const data = getFormValues(Object.keys(defaults.evening));
+    if(!validateRequired(data, requiredEvening, 'Večernji unos')) return;
     records[today].evening = data;
     records[today].eveningComment = buildEveningComment(data);
     records[today].updatedAt = new Date().toISOString();
