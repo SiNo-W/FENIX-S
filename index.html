@@ -2,550 +2,572 @@
 <html lang="hr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>FENIX S V1.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FENIX S App V1.2</title>
   <style>
     :root{
-      --bg:#050b14;
-      --panel:#0e1a2b;
-      --panel2:#142843;
-      --text:#ffffff;
-      --muted:#e5e7eb;
-      --soft:#cbd5e1;
+      --bg:#07111f;
+      --panel:#0f1b2d;
+      --panel2:#12243b;
+      --text:#f8fafc;
+      --muted:#94a3b8;
       --accent:#f59e0b;
       --green:#22c55e;
       --yellow:#facc15;
       --red:#ef4444;
-      --line:#3b587a;
       --blue:#38bdf8;
-      --input:#061524;
+      --line:#28415f;
+      --input:#081827;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      background:linear-gradient(180deg,#020617 0%,var(--bg) 100%);
-      color:var(--text);
-      font-size:16px;
-    }
-    header{
-      position:sticky;top:0;background:#020617;
-      padding:14px 16px;border-bottom:1px solid var(--line);z-index:5;
-      box-shadow:0 10px 24px rgba(0,0,0,.25);
-    }
-    h1{margin:0;font-size:22px;color:var(--accent);letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:14px;margin-top:4px;line-height:1.35}
-    main{padding:14px;max-width:820px;margin:auto}
-    .card{
-      background:rgba(14,26,43,.96);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:16px;
-      margin:12px 0;
-      box-shadow:0 10px 28px rgba(0,0,0,.18);
-    }
-    .card h2{margin:0 0 12px;font-size:19px;color:#fff}
-    label{display:block;margin-top:10px;color:var(--muted);font-size:15px;font-weight:700}
-    input,select,textarea,button{
-      width:100%;padding:12px;margin-top:6px;border-radius:14px;border:1px solid var(--line);
-      background:var(--input);color:var(--text);font-size:17px;min-height:47px;
-    }
-    input::placeholder,textarea::placeholder{color:#94a3b8}
-    input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
-    textarea{min-height:78px;line-height:1.35}
-    button{background:var(--accent);color:#111827;font-weight:bold;border:none;margin-top:14px;cursor:pointer}
-    button:active{transform:scale(.99)}
-    .btn2{background:var(--blue);color:#04131f}
-    .btn3{background:var(--green);color:#04130a}
-    .smallbtn{width:auto;padding:8px 12px;font-size:14px;min-height:auto}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
-    .setup-grid .wide{grid-column:1 / -1}
-    .hidden{display:none!important}
-    .pill{display:inline-block;padding:7px 11px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);margin:4px 4px 0 0;color:#fff}
-    .ok{color:var(--green)} .warn{color:var(--yellow)} .bad{color:var(--red)}
-    .score{font-size:34px;font-weight:bold;color:var(--accent)}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.35}
+    header{position:sticky;top:0;z-index:10;background:#020617;border-bottom:1px solid var(--line);padding:12px 14px}
+    h1{font-size:20px;margin:0;color:var(--accent)}
+    .subtitle{font-size:12px;color:var(--muted);margin-top:3px}
+    main{padding:14px;max-width:860px;margin:0 auto 80px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+    .card h2{font-size:18px;margin:0 0 10px;color:#fff}
+    .card h3{font-size:15px;margin:10px 0 8px;color:#fff}
+    .row{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px}
+    @media(min-width:720px){.row.two{grid-template-columns:1fr 1fr}.row.three{grid-template-columns:1fr 1fr 1fr}}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+    input,select,textarea{width:100%;background:var(--input);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:15px;outline:none}
+    textarea{min-height:72px;resize:vertical}
+    button{border:0;border-radius:12px;padding:11px 13px;font-size:15px;font-weight:700;cursor:pointer;color:#07111f;background:var(--accent)}
+    button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+    button.success{background:var(--green);color:#052e16}
+    button:disabled{opacity:.78;cursor:not-allowed}
+    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:13px;margin:3px 4px 3px 0}
+    .pill.active{color:#07111f;background:var(--accent);border-color:var(--accent);font-weight:700}
     .muted{color:var(--muted)}
-    .mini{font-size:13px;color:var(--soft);line-height:1.35;margin-top:10px}
-    footer{padding:20px;text-align:center;color:var(--muted);font-size:12px}
-    @media(max-width:430px){
-      main{padding:10px}
-      .card{padding:13px;border-radius:20px}
-      .setup-grid,.grid{gap:8px}
-      input,select,textarea,button{font-size:16px;padding:10px;min-height:44px}
-      label{font-size:14px;margin-top:8px}
-      h1{font-size:21px}
-    }
+    .small{font-size:13px}
+    .status{border-left:4px solid var(--accent);padding:10px;background:#0b1f34;border-radius:12px;margin-top:10px}
+    .ok{border-left-color:var(--green)}
+    .warn{border-left-color:var(--yellow)}
+    .bad{border-left-color:var(--red)}
+    .hidden{display:none!important}
+    .kv{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid rgba(148,163,184,.18);padding:7px 0;font-size:14px}
+    .kv:last-child{border-bottom:0}
+    .footer-nav{position:fixed;left:0;right:0;bottom:0;background:#020617;border-top:1px solid var(--line);padding:10px 14px;display:flex;gap:10px;justify-content:center;z-index:20}
+    .footer-nav button{max-width:230px;width:50%}
+    .quote{font-style:italic;color:#cbd5e1;border-left:3px solid var(--line);padding-left:10px;margin-top:10px}
   </style>
 </head>
-
 <body>
 <header>
-  <h1>🦅 FENIX S V1.1</h1>
-  <div class="sub" id="topLine">Osobni dnevnik energije, oporavka i napretka</div>
+  <h1>FENIX S App V1.2</h1>
+  <div class="subtitle" id="todayLabel">Dnevni unos</div>
 </header>
 
 <main>
+  <section class="card">
+    <h2>Prikaz dana</h2>
+    <div>
+      <span class="pill" id="pillMorning">Jutarnji dashboard</span>
+      <span class="pill" id="pillEvening">Večernji dashboard</span>
+    </div>
+    <div class="buttons">
+      <button class="secondary" id="showMorningBtn">Prikaži jutro</button>
+      <button class="secondary" id="showEveningBtn">Prikaži večer</button>
+    </div>
+    <p class="muted small">Aplikacija automatski predlaže jutarnji ili večernji prikaz prema vremenu, ali možeš ručno prebaciti.</p>
+  </section>
 
-  <section class="card" id="setupCard">
-    <h2>⚙️ Prvi setup</h2>
-    <div class="mini">Kompaktni unos s pojačanim kontrastom radi lakšeg čitanja.</div>
+  <section class="card" id="morningDashboard">
+    <h2>Jutarnji dashboard</h2>
+    <div id="morningStatus" class="status">Jutarnji podaci još nisu uneseni za danas.</div>
 
-    <div class="setup-grid">
-      <div>
-        <label>Ime</label>
-        <input id="name" placeholder="Siniša">
+    <div id="morningFormWrap">
+      <h3>Jutarnji unos</h3>
+      <div class="row three">
+        <div>
+          <label for="mEnergy">Energija ujutro (0–100)</label>
+          <input id="mEnergy" type="number" min="0" max="100" value="50" />
+        </div>
+        <div>
+          <label for="mSleep">Kvaliteta sna (1–10)</label>
+          <input id="mSleep" type="number" min="1" max="10" value="5" />
+        </div>
+        <div>
+          <label for="mBodyBattery">Body Battery / oporavak</label>
+          <input id="mBodyBattery" type="number" min="0" max="100" value="50" />
+        </div>
+      </div>
+      <div class="row three">
+        <div>
+          <label for="mStress">Stres ujutro (0–100)</label>
+          <input id="mStress" type="number" min="0" max="100" value="20" />
+        </div>
+        <div>
+          <label for="mCramps">Grčevi noću</label>
+          <select id="mCramps">
+            <option value="nema">nema</option>
+            <option value="blagi">blagi</option>
+            <option value="srednji">srednji</option>
+            <option value="jaki">jaki</option>
+          </select>
+        </div>
+        <div>
+          <label for="mPain">Bol</label>
+          <select id="mPain">
+            <option value="nema">nema</option>
+            <option value="blaga">blaga</option>
+            <option value="srednja">srednja</option>
+            <option value="jaka">jaka</option>
+          </select>
+        </div>
+      </div>
+      <div class="row two">
+        <div>
+          <label for="mWater">Voda jučer / do jutra (L)</label>
+          <input id="mWater" type="number" step="0.1" min="0" value="1.5" />
+        </div>
+        <div>
+          <label for="mMood">Osjećaj jutra</label>
+          <select id="mMood">
+            <option value="mirno">mirno</option>
+            <option value="umorno">umorno</option>
+            <option value="nestabilno">nestabilno</option>
+            <option value="dobro">dobro</option>
+          </select>
+        </div>
       </div>
       <div>
-        <label>Datum rođenja</label>
-        <input id="birth" type="date">
+        <label for="mNote">Napomena</label>
+        <textarea id="mNote" placeholder="Kratka jutarnja napomena..."></textarea>
       </div>
-
-      <div>
-        <label>Spol</label>
-        <select id="sex">
-          <option value="">Odaberi</option>
-          <option value="M">M</option>
-          <option value="Ž">Ž</option>
-        </select>
-      </div>
-      <div>
-        <label>Cilj</label>
-        <select id="goal">
-          <option>Oporavak nakon bolesti</option>
-          <option>Više energije</option>
-          <option>Bolji san</option>
-          <option>Kondicija</option>
-          <option>Opće zdravlje</option>
-          <option>Drugo</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Visina (cm)</label>
-        <input id="height" type="number" placeholder="180">
-      </div>
-      <div>
-        <label>Težina (kg)</label>
-        <input id="weight" type="number" placeholder="85">
-      </div>
-
-      <div>
-        <label>Smartwatch</label>
-        <select id="smartwatch" onchange="toggleWatchFields()">
-          <option>Da</option>
-          <option>Ne</option>
-        </select>
-      </div>
-      <div>
-        <label>Zona</label>
-        <input id="timezone" placeholder="Europe/Zagreb">
-      </div>
-
-      <div id="watchBrandBox">
-        <label>Proizvođač</label>
-        <select id="watchBrand" onchange="updateWatchModels()">
-          <option>Garmin</option>
-          <option>Huawei</option>
-          <option>Apple</option>
-          <option>Samsung</option>
-          <option>Polar</option>
-          <option>Coros</option>
-          <option>Suunto</option>
-          <option>Drugo</option>
-        </select>
-      </div>
-      <div id="watchModelBox">
-        <label>Model</label>
-        <select id="watchModel"></select>
-      </div>
-
-      <div>
-        <label>Buđenje</label>
-        <input id="wakeTime" type="time" value="06:30">
-      </div>
-      <div>
-        <label>Spavanje</label>
-        <input id="sleepTime" type="time" value="22:00">
-      </div>
-
-      <div class="wide">
-        <label>Važna napomena za FENIX S</label>
-        <textarea id="noteSetup" placeholder="npr. oporavljam se nakon bolesti..."></textarea>
+      <div class="buttons">
+        <button id="saveMorningBtn">Spremi jutarnji unos</button>
+        <button class="secondary" id="resetMorningBtn">Poništi polja</button>
       </div>
     </div>
 
-    <button onclick="saveSetup()">💾 Spremi setup</button>
-  </section>
-
-  <section class="card hidden" id="dashboard">
-    <h2 id="hello">Dobrodošao</h2>
-    <div class="muted" id="todayInfo"></div>
-
-    <div id="yesterdayBox" class="card hidden" style="background:#0b1f33">
-      <h2>🌞 Jučerašnji sažetak</h2>
-      <div id="yesterdayText"></div>
+    <div id="morningSavedWrap" class="hidden">
+      <div class="buttons">
+        <button class="success" disabled>Jutarnji podaci za danas uneseni</button>
+        <button class="secondary" id="editMorningBtn">Uredi današnji jutarnji unos</button>
+      </div>
     </div>
 
-    <div class="pill">Status dana: <b id="dayStatus">Novi dan</b></div>
+    <h3>Jutarnji komentar</h3>
+    <div id="morningComment" class="status">Nakon spremanja prikazat će se kratki jutarnji komentar.</div>
+
+    <h3>Kratki osvrt na jučer</h3>
+    <div id="yesterdaySummary" class="status">Ako nema jučerašnjih podataka, aplikacija će to jasno napisati.</div>
   </section>
 
-  <section class="card hidden" id="morningCard">
-    <h2>🌅 Jutarnji unos</h2>
+  <section class="card hidden" id="eveningDashboard">
+    <h2>Večernji dashboard</h2>
+    <div id="eveningStatus" class="status">Večernji podaci još nisu uneseni za danas.</div>
 
-    <div class="grid">
-      <div><label>Body Battery sada</label><input id="bbNow" type="number" min="0" max="100"></div>
-      <div><label>BB punjenje noću</label><input id="bbCharge" type="number"></div>
-      <div><label>San 1-10</label><input id="sleepScore" type="number" min="1" max="10"></div>
-      <div><label>Stres 0-100</label><input id="stress" type="number" min="0" max="100"></div>
-      <div><label>Energija 1-10</label><input id="energy" type="number" min="1" max="10"></div>
-      <div><label>Temperatura °C</label><input id="temp" type="number" step="0.1"></div>
-    </div>
-
-    <label>Jutarnja bilješka</label>
-    <textarea id="morningNote"></textarea>
-
-    <button onclick="saveMorning()">💾 Spremi jutro</button>
-
-    <div id="morningResult" class="card hidden" style="background:#0b1f33"></div>
-  </section>
-
-  <section class="card hidden" id="eveningCard">
-    <h2>🌙 Večernji unos</h2>
-
-    <div class="grid">
-      <div><label>Voda danas L</label><input id="water" type="number" step="0.1"></div>
-      <div><label>Aktivnost 1-10</label><input id="activity" type="number" min="1" max="10"></div>
-      <div><label>Ocjena dana 1-10</label><input id="dayRating" type="number" min="1" max="10"></div>
+    <div id="eveningFormWrap">
+      <h3>Večernje zatvaranje</h3>
+      <div class="row three">
+        <div>
+          <label for="eEnergy">Energija navečer (0–100)</label>
+          <input id="eEnergy" type="number" min="0" max="100" value="40" />
+        </div>
+        <div>
+          <label for="eStress">Stres dana (0–100)</label>
+          <input id="eStress" type="number" min="0" max="100" value="30" />
+        </div>
+        <div>
+          <label for="eActivity">Aktivnost dana</label>
+          <select id="eActivity">
+            <option value="niska">niska</option>
+            <option value="umjerena">umjerena</option>
+            <option value="visoka">visoka</option>
+            <option value="previsoka">previsoka</option>
+          </select>
+        </div>
+      </div>
+      <div class="row three">
+        <div>
+          <label for="eCramps">Grčevi tijekom dana</label>
+          <select id="eCramps">
+            <option value="nema">nema</option>
+            <option value="blagi">blagi</option>
+            <option value="srednji">srednji</option>
+            <option value="jaki">jaki</option>
+          </select>
+        </div>
+        <div>
+          <label for="ePain">Bol</label>
+          <select id="ePain">
+            <option value="nema">nema</option>
+            <option value="blaga">blaga</option>
+            <option value="srednja">srednja</option>
+            <option value="jaka">jaka</option>
+          </select>
+        </div>
+        <div>
+          <label for="eWater">Voda danas (L)</label>
+          <input id="eWater" type="number" step="0.1" min="0" value="1.5" />
+        </div>
+      </div>
+      <div class="row two">
+        <div>
+          <label for="eMood">Zaključak dana</label>
+          <select id="eMood">
+            <option value="mirno">mirno</option>
+            <option value="dobro">dobro</option>
+            <option value="umorno">umorno</option>
+            <option value="preopterećeno">preopterećeno</option>
+          </select>
+        </div>
+        <div>
+          <label for="eSleepPlan">Plan za san</label>
+          <select id="eSleepPlan">
+            <option value="standardno">standardno</option>
+            <option value="ranije_spavanje">ranije spavanje</option>
+            <option value="mirnija_vecer">mirnija večer</option>
+          </select>
+        </div>
+      </div>
       <div>
-        <label>Bolovi danas?</label>
-        <select id="painExist" onchange="togglePain()">
-          <option>Ne</option>
-          <option>Da</option>
-        </select>
+        <label for="eNote">Napomena</label>
+        <textarea id="eNote" placeholder="Kratka večernja napomena..."></textarea>
+      </div>
+      <div class="buttons">
+        <button id="saveEveningBtn">Spremi večernje zatvaranje</button>
+        <button class="secondary" id="resetEveningBtn">Poništi polja</button>
       </div>
     </div>
 
-    <div id="painBox" class="hidden">
-      <div class="grid">
-        <div><label>Glava 1-10</label><input id="painHead" type="number" min="0" max="10" value="0"></div>
-        <div><label>Ruka 1-10</label><input id="painArm" type="number" min="0" max="10" value="0"></div>
-        <div><label>Noga 1-10</label><input id="painLeg" type="number" min="0" max="10" value="0"></div>
-        <div><label>Tijelo 1-10</label><input id="painBody" type="number" min="0" max="10" value="0"></div>
+    <div id="eveningSavedWrap" class="hidden">
+      <div class="buttons">
+        <button class="success" disabled>Večernji podaci za danas uneseni</button>
+        <button class="secondary" id="editEveningBtn">Uredi današnje večernje zatvaranje</button>
       </div>
     </div>
 
-    <label>Večernja bilješka</label>
-    <textarea id="eveningNote"></textarea>
+    <h3>Večernji komentar</h3>
+    <div id="eveningComment" class="status">Nakon spremanja prikazat će se kratki večernji komentar.</div>
 
-    <button class="btn3" onclick="closeDay()">✅ Zatvori dan</button>
+    <h3>Sažetak dana</h3>
+    <div id="todaySummary" class="status">Sažetak će se prikazati nakon unosa.</div>
   </section>
 
-  <section class="card hidden" id="reviewCard">
-    <h2>🌙 Večernji osvrt</h2>
-    <div id="reviewText"></div>
+  <section class="card">
+    <h2>Pregled spremljenih podataka</h2>
+    <div id="dataPreview" class="muted small">Još nema spremljenih podataka.</div>
+    <div class="buttons">
+      <button class="secondary" id="exportBtn">Izvoz JSON</button>
+      <button class="secondary" id="clearBtn">Obriši sve podatke</button>
+    </div>
+    <div class="quote">„Red je pola posla.”</div>
   </section>
-
-  <section class="card hidden" id="dataCard">
-    <h2>📦 Podaci</h2>
-    <button class="btn2" onclick="exportData()">Izvoz podataka JSON</button>
-    <button class="smallbtn" onclick="resetApp()">Reset aplikacije</button>
-    <pre id="exportBox" style="white-space:pre-wrap;color:var(--muted)"></pre>
-  </section>
-
 </main>
 
-<footer>
-  FENIX S V1.1 – jasnije, čitljivije, kompaktnije.
-</footer>
+<div class="footer-nav">
+  <button id="bottomMorningBtn" class="secondary">Jutro</button>
+  <button id="bottomEveningBtn" class="secondary">Večer</button>
+</div>
 
 <script>
-const LS_SETUP = "fenix_setup_v10";
-const LS_DAYS = "fenix_days_v10";
+(function(){
+  const APP_VERSION = '1.2';
+  const STORAGE_KEY = 'fenix_s_records_v1_2';
+  const SETTINGS_KEY = 'fenix_s_settings_v1_2';
 
-const WATCH_MODELS = {
-  "Garmin":["Instinct 2 Solar","Instinct 2X Solar","Forerunner 165","Forerunner 255","Fenix 7","Venu","Drugo"],
-  "Huawei":["Watch GT 3","Watch GT 4","Watch Fit","Drugo"],
-  "Apple":["Apple Watch SE","Apple Watch Series","Apple Watch Ultra","Drugo"],
-  "Samsung":["Galaxy Watch","Galaxy Watch Classic","Drugo"],
-  "Polar":["Vantage","Pacer","Grit X","Drugo"],
-  "Coros":["Pace","Apex","Vertix","Drugo"],
-  "Suunto":["Suunto 9","Suunto Race","Suunto Vertical","Drugo"],
-  "Drugo":["Drugo"]
-};
+  const $ = (id) => document.getElementById(id);
 
-function todayKey(){
-  const d = new Date();
-  return d.toISOString().slice(0,10);
-}
-
-function yesterdayKey(){
-  const d = new Date();
-  d.setDate(d.getDate()-1);
-  return d.toISOString().slice(0,10);
-}
-
-function getDays(){
-  return JSON.parse(localStorage.getItem(LS_DAYS) || "{}");
-}
-
-function setDays(days){
-  localStorage.setItem(LS_DAYS, JSON.stringify(days));
-}
-
-function val(id){ return document.getElementById(id).value; }
-function num(id){ return Number(document.getElementById(id).value || 0); }
-
-function updateWatchModels(){
-  const brand = val("watchBrand") || "Garmin";
-  const modelSelect = document.getElementById("watchModel");
-  modelSelect.innerHTML = "";
-  (WATCH_MODELS[brand] || ["Drugo"]).forEach(model => {
-    const opt = document.createElement("option");
-    opt.textContent = model;
-    opt.value = model;
-    modelSelect.appendChild(opt);
-  });
-}
-
-function toggleWatchFields(){
-  const show = val("smartwatch") === "Da";
-  document.getElementById("watchBrandBox").classList.toggle("hidden", !show);
-  document.getElementById("watchModelBox").classList.toggle("hidden", !show);
-}
-
-function init(){
-  document.getElementById("timezone").value =
-    Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Zagreb";
-  updateWatchModels();
-  toggleWatchFields();
-
-  const setup = JSON.parse(localStorage.getItem(LS_SETUP) || "null");
-
-  if(setup){
-    document.getElementById("setupCard").classList.add("hidden");
-    document.getElementById("dashboard").classList.remove("hidden");
-    document.getElementById("morningCard").classList.remove("hidden");
-    document.getElementById("eveningCard").classList.remove("hidden");
-    document.getElementById("dataCard").classList.remove("hidden");
-
-    document.getElementById("hello").innerText =
-      `Dobro došao, ${setup.name || "prijatelju"} 🦅`;
-
-    document.getElementById("todayInfo").innerText =
-      `Danas je ${todayKey()} | Zona: ${setup.timezone || "Europe/Zagreb"}`;
-
-    loadToday();
-    showYesterday();
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function dateKey(d=new Date()){
+    return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
   }
-}
+  function displayDate(key){
+    const [y,m,d] = key.split('-');
+    return `${d}.${m}.${y}.`;
+  }
+  function yesterdayKey(){
+    const d = new Date();
+    d.setDate(d.getDate()-1);
+    return dateKey(d);
+  }
+  function loadRecords(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch(e){ return {}; }
+  }
+  function saveRecords(records){ localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); }
+  function loadSettings(){
+    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; }
+    catch(e){ return {}; }
+  }
+  function saveSettings(settings){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
 
-function saveSetup(){
-  const setup = {
-    name: val("name"),
-    birth: val("birth"),
-    sex: val("sex"),
-    height: num("height"),
-    weight: num("weight"),
-    goal: val("goal"),
-    smartwatch: val("smartwatch"),
-    watchBrand: val("smartwatch") === "Da" ? val("watchBrand") : "",
-    watchModel: val("smartwatch") === "Da" ? val("watchModel") : "",
-    timezone: val("timezone"),
-    wakeTime: val("wakeTime"),
-    sleepTime: val("sleepTime"),
-    note: val("noteSetup"),
-    version: "1.1",
-    createdAt: new Date().toISOString()
-  };
-  localStorage.setItem(LS_SETUP, JSON.stringify(setup));
-  location.reload();
-}
+  const today = dateKey();
+  $('todayLabel').textContent = `Danas je ${displayDate(today)} · V${APP_VERSION}`;
 
-function calculateMorningIndex(d){
-  let score = 50;
-  score += (d.bbNow || 0) * 0.25;
-  score += (d.bbCharge || 0) * 0.10;
-  score += (d.sleepScore || 0) * 3;
-  score += (d.energy || 0) * 3;
-  score -= (d.stress || 0) * 0.20;
-  return Math.max(0, Math.min(100, Math.round(score)));
-}
-
-function labelScore(score){
-  if(score >= 85) return "Izvrstan";
-  if(score >= 70) return "Vrlo dobar";
-  if(score >= 55) return "Dobar";
-  if(score >= 40) return "Za oprez";
-  return "Tijelo traži više odmora";
-}
-
-function saveMorning(){
-  const days = getDays();
-  const key = todayKey();
-
-  const day = days[key] || {};
-  day.date = key;
-  day.status = "Otvoren";
-  day.morning = {
-    bbNow: num("bbNow"),
-    bbCharge: num("bbCharge"),
-    sleepScore: num("sleepScore"),
-    stress: num("stress"),
-    energy: num("energy"),
-    temp: num("temp"),
-    note: val("morningNote"),
-    savedAt: new Date().toISOString()
+  const defaults = {
+    morning: {
+      mEnergy: '50', mSleep: '5', mBodyBattery: '50', mStress: '20',
+      mCramps: 'nema', mPain: 'nema', mWater: '1.5', mMood: 'mirno', mNote: ''
+    },
+    evening: {
+      eEnergy: '40', eStress: '30', eActivity: 'umjerena', eCramps: 'nema',
+      ePain: 'nema', eWater: '1.5', eMood: 'mirno', eSleepPlan: 'standardno', eNote: ''
+    }
   };
 
-  day.morningIndex = calculateMorningIndex(day.morning);
-  days[key] = day;
-  setDays(days);
+  function setFormValues(values){
+    Object.entries(values).forEach(([id,val]) => { if($(id)) $(id).value = val; });
+  }
+  function getFormValues(ids){
+    const out = {};
+    ids.forEach(id => out[id] = $(id).value);
+    return out;
+  }
+  function resetMorningForm(){ setFormValues(defaults.morning); }
+  function resetEveningForm(){ setFormValues(defaults.evening); }
 
-  document.getElementById("dayStatus").innerText = "Otvoren";
-  document.getElementById("morningResult").classList.remove("hidden");
-  document.getElementById("morningResult").innerHTML = `
-    <div class="score">${day.morningIndex}/100</div>
-    <b>${labelScore(day.morningIndex)}</b>
-    <p class="muted">Jutro je spremljeno. Dan je otvoren.</p>
-  `;
-}
-
-function togglePain(){
-  const show = val("painExist") === "Da";
-  document.getElementById("painBox").classList.toggle("hidden", !show);
-}
-
-function closeDay(){
-  const days = getDays();
-  const key = todayKey();
-  const day = days[key] || {date:key};
-
-  day.status = "Zatvoren";
-  day.evening = {
-    water: num("water"),
-    activity: num("activity"),
-    dayRating: num("dayRating"),
-    painExist: val("painExist"),
-    painHead: num("painHead"),
-    painArm: num("painArm"),
-    painLeg: num("painLeg"),
-    painBody: num("painBody"),
-    note: val("eveningNote"),
-    savedAt: new Date().toISOString()
-  };
-
-  day.dayResult = calculateDayResult(day);
-  days[key] = day;
-  setDays(days);
-
-  document.getElementById("dayStatus").innerText = "Zatvoren";
-  showReview(day);
-}
-
-function calculateDayResult(day){
-  let score = day.morningIndex || 50;
-  const e = day.evening || {};
-
-  score += (e.dayRating || 0) * 3;
-  score += (e.activity || 0) * 1.5;
-
-  const water = e.water || 0;
-  if(water >= 2) score += 8;
-  else if(water >= 1.5) score += 4;
-  else score -= 6;
-
-  const painAvg = ((e.painHead||0)+(e.painArm||0)+(e.painLeg||0)+(e.painBody||0))/4;
-  score -= painAvg * 3;
-
-  return Math.max(0, Math.min(100, Math.round(score)));
-}
-
-function showReview(day){
-  const diff = (day.dayResult || 0) - (day.morningIndex || 0);
-  const sign = diff >= 0 ? "+" : "";
-
-  document.getElementById("reviewCard").classList.remove("hidden");
-  document.getElementById("reviewText").innerHTML = `
-    <div class="pill">Jutarnji indeks: <b>${day.morningIndex || 0}/100</b></div>
-    <div class="pill">Rezultat dana: <b>${day.dayResult || 0}/100</b></div>
-    <div class="pill">Promjena: <b>${sign}${diff}</b></div>
-
-    <p><b>${labelScore(day.dayResult || 0)}</b></p>
-
-    <p>Dobro je što si zatvorio dan. Time FENIX S dobiva podatke iz kojih ćemo kasnije moći tražiti obrasce umora, oporavka, boli i energije.</p>
-
-    <p><b>Preporuka za sutra:</b><br>
-    Zadrži jutarnji unos kratak, popij vodu ranije tijekom dana i obrati pažnju na tijelo ako se bolovi pojačaju.</p>
-
-    <p class="muted">“Male stvari, učinjene dosljedno, stvaraju velike promjene.”</p>
-  `;
-}
-
-function showYesterday(){
-  const days = getDays();
-  const y = days[yesterdayKey()];
-  if(!y) return;
-
-  document.getElementById("yesterdayBox").classList.remove("hidden");
-  document.getElementById("yesterdayText").innerHTML = `
-    🦅 Jutarnji indeks: <b>${y.morningIndex || 0}/100</b><br>
-    🌅 Rezultat dana: <b>${y.dayResult || 0}/100</b><br>
-    💧 Voda: <b>${y.evening?.water || 0} L</b><br>
-    ⭐ Ocjena dana: <b>${y.evening?.dayRating || 0}/10</b><br>
-    😣 Bolovi: glava ${y.evening?.painHead || 0}, ruka ${y.evening?.painArm || 0}, noga ${y.evening?.painLeg || 0}, tijelo ${y.evening?.painBody || 0}
-  `;
-}
-
-function loadToday(){
-  const days = getDays();
-  const d = days[todayKey()];
-  if(!d) return;
-
-  document.getElementById("dayStatus").innerText = d.status || "Otvoren";
-
-  if(d.morning){
-    document.getElementById("bbNow").value = d.morning.bbNow || "";
-    document.getElementById("bbCharge").value = d.morning.bbCharge || "";
-    document.getElementById("sleepScore").value = d.morning.sleepScore || "";
-    document.getElementById("stress").value = d.morning.stress || "";
-    document.getElementById("energy").value = d.morning.energy || "";
-    document.getElementById("temp").value = d.morning.temp || "";
-    document.getElementById("morningNote").value = d.morning.note || "";
+  function statusClass(el, type){
+    el.className = 'status' + (type ? ' ' + type : '');
   }
 
-  if(d.evening){
-    document.getElementById("water").value = d.evening.water || "";
-    document.getElementById("activity").value = d.evening.activity || "";
-    document.getElementById("dayRating").value = d.evening.dayRating || "";
-    document.getElementById("painExist").value = d.evening.painExist || "Ne";
-    togglePain();
-    document.getElementById("painHead").value = d.evening.painHead || 0;
-    document.getElementById("painArm").value = d.evening.painArm || 0;
-    document.getElementById("painLeg").value = d.evening.painLeg || 0;
-    document.getElementById("painBody").value = d.evening.painBody || 0;
-    document.getElementById("eveningNote").value = d.evening.note || "";
+  function showMode(mode){
+    const isMorning = mode === 'morning';
+    $('morningDashboard').classList.toggle('hidden', !isMorning);
+    $('eveningDashboard').classList.toggle('hidden', isMorning);
+    $('pillMorning').classList.toggle('active', isMorning);
+    $('pillEvening').classList.toggle('active', !isMorning);
+    $('bottomMorningBtn').classList.toggle('success', isMorning);
+    $('bottomEveningBtn').classList.toggle('success', !isMorning);
+    const settings = loadSettings();
+    settings.mode = mode;
+    saveSettings(settings);
   }
-}
 
-function exportData(){
-  const data = {
-    setup: JSON.parse(localStorage.getItem(LS_SETUP) || "{}"),
-    days: getDays()
-  };
-  document.getElementById("exportBox").innerText = JSON.stringify(data,null,2);
-}
-
-function resetApp(){
-  if(confirm("Sigurno želiš obrisati FENIX S podatke na ovom uređaju?")){
-    localStorage.removeItem(LS_SETUP);
-    localStorage.removeItem(LS_DAYS);
-    location.reload();
+  function automaticMode(){
+    const hour = new Date().getHours();
+    return (hour >= 4 && hour < 14) ? 'morning' : 'evening';
   }
-}
 
-init();
+  function buildMorningComment(m){
+    const parts = [];
+    const energy = Number(m.mEnergy);
+    const sleep = Number(m.mSleep);
+    const stress = Number(m.mStress);
+    const bb = Number(m.mBodyBattery);
+
+    if (energy < 35 || bb < 30) parts.push('Kreni sporije i čuvaj prvi dio dana.');
+    else if (energy >= 65 && bb >= 60) parts.push('Jutro izgleda stabilno; iskoristi energiju bez forsiranja.');
+    else parts.push('Jutro je za umjeren ritam i realan plan.');
+
+    if (sleep <= 4) parts.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
+    if (stress >= 60) parts.push('Stres je povišen; koristi kraće pauze i jednostavniji raspored.');
+    if (m.mCramps !== 'nema') parts.push(`Noćni grčevi su zabilježeni kao ${m.mCramps}; prati vodu, opterećenje i večernji ritam.`);
+
+    // Važno pravilo: ako boli nema, bol se uopće ne spominje.
+    if (m.mPain !== 'nema') {
+      if (m.mPain === 'blaga') parts.push('Blaga bol je zabilježena; ostani u mirnijem tempu.');
+      else parts.push(`Bol je zabilježena kao ${m.mPain}; nemoj forsirati i po potrebi se konzultiraj sa stručnom osobom.`);
+    }
+
+    if (Number(m.mWater) < 1.5) parts.push('Unos vode je niži; danas ciljaj ravnomjernije piti kroz dan.');
+    return parts.join(' ');
+  }
+
+  function buildEveningComment(e){
+    const parts = [];
+    const energy = Number(e.eEnergy);
+    const stress = Number(e.eStress);
+    const water = Number(e.eWater);
+
+    if (e.eMood === 'preopterećeno' || e.eActivity === 'previsoka') parts.push('Dan je bio jači nego što tijelo vjerojatno treba; večer zatvori mirno i bez dodatnog opterećenja.');
+    else if (energy >= 50 && stress < 50) parts.push('Dan je zatvoren stabilno.');
+    else parts.push('Dan je zatvoren; sada je najvažnije smirivanje ritma.');
+
+    if (stress >= 60) parts.push('Stres je bio povišen, pa neka večer bude što jednostavnija.');
+    if (e.eCramps !== 'nema') parts.push(`Grčevi su zabilježeni kao ${e.eCramps}; obrati pažnju na vodu, opterećenje i opuštanje prije spavanja.`);
+
+    // Važno pravilo: ako boli nema, bol se uopće ne spominje.
+    if (e.ePain !== 'nema') {
+      if (e.ePain === 'blaga') parts.push('Blaga bol je zabilježena; večeras bez forsiranja.');
+      else parts.push(`Bol je zabilježena kao ${e.ePain}; večeras smanji opterećenje i po potrebi potraži stručni savjet.`);
+    }
+
+    if (water < 1.5) parts.push('Voda je danas bila niža; sutra kreni ranije s ravnomjernim unosom.');
+    if (e.eSleepPlan === 'ranije_spavanje') parts.push('Plan ranijeg spavanja je dobar izbor za oporavak.');
+    if (e.eSleepPlan === 'mirnija_vecer') parts.push('Mirnija večer može pomoći boljem prijelazu u san.');
+    return parts.join(' ');
+  }
+
+  function buildYesterdaySummary(){
+    const records = loadRecords();
+    const yKey = yesterdayKey();
+    const y = records[yKey];
+    const box = $('yesterdaySummary');
+    if(!y){
+      box.textContent = `Za ${displayDate(yKey)} nema spremljenih podataka. To je u redu; današnji unos će biti nova početna točka.`;
+      statusClass(box, 'warn');
+      return;
+    }
+    const lines = [];
+    if(y.morning) lines.push(`Jutro: energija ${y.morning.mEnergy}, san ${y.morning.mSleep}/10, oporavak ${y.morning.mBodyBattery}.`);
+    if(y.evening) lines.push(`Večer: energija ${y.evening.eEnergy}, stres ${y.evening.eStress}, aktivnost ${y.evening.eActivity}.`);
+    box.textContent = lines.length ? lines.join(' ') : `Za ${displayDate(yKey)} postoje podaci, ali nisu potpuni.`;
+    statusClass(box, 'ok');
+  }
+
+  function buildTodaySummary(){
+    const records = loadRecords();
+    const r = records[today];
+    const box = $('todaySummary');
+    if(!r){
+      box.textContent = 'Za danas još nema spremljenih podataka.';
+      statusClass(box, 'warn');
+      return;
+    }
+    const lines = [];
+    if(r.morning) lines.push(`Jutro: energija ${r.morning.mEnergy}, san ${r.morning.mSleep}/10, oporavak ${r.morning.mBodyBattery}.`);
+    if(r.evening) lines.push(`Večer: energija ${r.evening.eEnergy}, stres ${r.evening.eStress}, aktivnost ${r.evening.eActivity}, voda ${r.evening.eWater} L.`);
+    box.textContent = lines.length ? lines.join(' ') : 'Danas nema potpunog sažetka.';
+    statusClass(box, lines.length ? 'ok' : 'warn');
+  }
+
+  function refreshUI(){
+    const records = loadRecords();
+    const r = records[today] || {};
+
+    if(r.morning){
+      $('morningStatus').textContent = `Jutarnji podaci uneseni za ${displayDate(today)}.`;
+      statusClass($('morningStatus'), 'ok');
+      $('morningFormWrap').classList.add('hidden');
+      $('morningSavedWrap').classList.remove('hidden');
+      $('morningComment').textContent = r.morningComment || buildMorningComment(r.morning);
+      statusClass($('morningComment'), 'ok');
+    } else {
+      $('morningStatus').textContent = 'Jutarnji podaci još nisu uneseni za danas.';
+      statusClass($('morningStatus'), 'warn');
+      $('morningFormWrap').classList.remove('hidden');
+      $('morningSavedWrap').classList.add('hidden');
+      $('morningComment').textContent = 'Nakon spremanja prikazat će se kratki jutarnji komentar.';
+      statusClass($('morningComment'), '');
+    }
+
+    if(r.evening){
+      $('eveningStatus').textContent = `Večernji podaci uneseni za ${displayDate(today)}.`;
+      statusClass($('eveningStatus'), 'ok');
+      $('eveningFormWrap').classList.add('hidden');
+      $('eveningSavedWrap').classList.remove('hidden');
+      $('eveningComment').textContent = r.eveningComment || buildEveningComment(r.evening);
+      statusClass($('eveningComment'), 'ok');
+    } else {
+      $('eveningStatus').textContent = 'Večernji podaci još nisu uneseni za danas.';
+      statusClass($('eveningStatus'), 'warn');
+      $('eveningFormWrap').classList.remove('hidden');
+      $('eveningSavedWrap').classList.add('hidden');
+      $('eveningComment').textContent = 'Nakon spremanja prikazat će se kratki večernji komentar.';
+      statusClass($('eveningComment'), '');
+    }
+
+    buildYesterdaySummary();
+    buildTodaySummary();
+    refreshPreview();
+  }
+
+  function refreshPreview(){
+    const records = loadRecords();
+    const keys = Object.keys(records).sort().reverse();
+    const box = $('dataPreview');
+    if(!keys.length){
+      box.textContent = 'Još nema spremljenih podataka.';
+      return;
+    }
+    const html = keys.slice(0,7).map(k => {
+      const r = records[k];
+      const m = r.morning ? 'jutro ✓' : 'jutro –';
+      const e = r.evening ? 'večer ✓' : 'večer –';
+      return `<div class="kv"><span>${displayDate(k)}</span><strong>${m} · ${e}</strong></div>`;
+    }).join('');
+    box.innerHTML = html;
+  }
+
+  function saveMorning(){
+    const records = loadRecords();
+    if(!records[today]) records[today] = {};
+    const data = getFormValues(Object.keys(defaults.morning));
+    records[today].morning = data;
+    records[today].morningComment = buildMorningComment(data);
+    records[today].updatedAt = new Date().toISOString();
+    saveRecords(records);
+
+    // Nakon spremanja forma se vraća na početne vrijednosti.
+    resetMorningForm();
+    refreshUI();
+  }
+
+  function saveEvening(){
+    const records = loadRecords();
+    if(!records[today]) records[today] = {};
+    const data = getFormValues(Object.keys(defaults.evening));
+    records[today].evening = data;
+    records[today].eveningComment = buildEveningComment(data);
+    records[today].updatedAt = new Date().toISOString();
+    saveRecords(records);
+
+    // Nakon spremanja forma se vraća na početne vrijednosti.
+    resetEveningForm();
+    refreshUI();
+  }
+
+  function editMorning(){
+    const records = loadRecords();
+    const r = records[today];
+    if(r && r.morning) setFormValues(r.morning);
+    $('morningFormWrap').classList.remove('hidden');
+    $('morningSavedWrap').classList.add('hidden');
+  }
+
+  function editEvening(){
+    const records = loadRecords();
+    const r = records[today];
+    if(r && r.evening) setFormValues(r.evening);
+    $('eveningFormWrap').classList.remove('hidden');
+    $('eveningSavedWrap').classList.add('hidden');
+  }
+
+  function exportJson(){
+    const records = loadRecords();
+    const blob = new Blob([JSON.stringify(records, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `fenix-s-export-${today}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearAll(){
+    const ok = confirm('Obrisati sve spremljene FENIX S podatke iz ovog preglednika?');
+    if(!ok) return;
+    localStorage.removeItem(STORAGE_KEY);
+    refreshUI();
+  }
+
+  $('showMorningBtn').addEventListener('click', () => showMode('morning'));
+  $('showEveningBtn').addEventListener('click', () => showMode('evening'));
+  $('bottomMorningBtn').addEventListener('click', () => showMode('morning'));
+  $('bottomEveningBtn').addEventListener('click', () => showMode('evening'));
+  $('saveMorningBtn').addEventListener('click', saveMorning);
+  $('saveEveningBtn').addEventListener('click', saveEvening);
+  $('resetMorningBtn').addEventListener('click', resetMorningForm);
+  $('resetEveningBtn').addEventListener('click', resetEveningForm);
+  $('editMorningBtn').addEventListener('click', editMorning);
+  $('editEveningBtn').addEventListener('click', editEvening);
+  $('exportBtn').addEventListener('click', exportJson);
+  $('clearBtn').addEventListener('click', clearAll);
+
+  resetMorningForm();
+  resetEveningForm();
+  const settings = loadSettings();
+  showMode(settings.mode || automaticMode());
+  refreshUI();
+})();
 </script>
-
 </body>
 </html>
