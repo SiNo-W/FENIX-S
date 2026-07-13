@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>FENIX S App V1.2.1</title>
+  <title>FENIX S App V1.2.2</title>
   <style>
     :root{
       --bg:#07111f;
@@ -56,47 +56,34 @@
 </head>
 <body>
 <header>
-  <h1>FENIX S App V1.2.1</h1>
-  <div class="subtitle" id="todayLabel">Dnevni unos</div>
+  <h1>FENIX S App V1.2.2</h1>
+  <div class="subtitle" id="todayLabel">Danas</div>
 </header>
 
 <main>
-  <section class="card">
-    <h2>Prikaz dana</h2>
-    <div>
-      <span class="pill" id="pillMorning">Jutarnji dashboard</span>
-      <span class="pill" id="pillEvening">Večernji dashboard</span>
-    </div>
-    <div class="buttons">
-      <button class="secondary" id="showMorningBtn">Prikaži jutro</button>
-      <button class="secondary" id="showEveningBtn">Prikaži večer</button>
-    </div>
-    
-  </section>
-
   <section class="card" id="morningDashboard">
-    <h2>Jutarnji dashboard</h2>
-    <div id="morningStatus" class="status">Jutarnji podaci još nisu uneseni za danas.</div>
+    <h2>Jutro</h2>
+    <div id="morningStatus" class="status">Jutro nije uneseno.</div>
 
     <div id="morningFormWrap">
-      <h3>Jutarnji unos</h3>
+      <h3>Unos</h3>
       <div class="row three">
         <div>
-          <label for="mEnergy">Energija ujutro (0–100)</label>
-          <input id="mEnergy" type="number" min="0" max="100" />
+          <label for="mEnergy">Kako se osjećaš (1–10)</label>
+          <input id="mEnergy" type="number" min="1" max="10" />
         </div>
         <div>
-          <label for="mSleep">Kvaliteta sna (1–10)</label>
-          <input id="mSleep" type="number" min="1" max="10" />
+          <label for="mSleep">Kvaliteta sna (0–100)</label>
+          <input id="mSleep" type="number" min="0" max="100" />
         </div>
         <div>
-          <label for="mBodyBattery">Body Battery / oporavak</label>
+          <label for="mBodyBattery">Body Battery (0–100)</label>
           <input id="mBodyBattery" type="number" min="0" max="100" />
         </div>
       </div>
       <div class="row three">
         <div>
-          <label for="mStress">Stres ujutro (0–100)</label>
+          <label for="mStress">Stres (0–100)</label>
           <input id="mStress" type="number" min="0" max="100" />
         </div>
         <div>
@@ -122,11 +109,11 @@
       </div>
       <div class="row two">
         <div>
-          <label for="mWater">Voda jučer / do jutra (L)</label>
+          <label for="mWater">Voda (L)</label>
           <input id="mWater" type="number" step="0.1" min="0" />
         </div>
         <div>
-          <label for="mMood">Osjećaj jutra</label>
+          <label for="mMood">Jutarnji osjećaj</label>
           <select id="mMood">
             <option value="">odaberi</option>
             <option value="mirno">mirno</option>
@@ -138,45 +125,45 @@
       </div>
       <div>
         <label for="mNote">Napomena</label>
-        <textarea id="mNote" placeholder="Kratka jutarnja napomena..."></textarea>
+        <textarea id="mNote" placeholder="Napomena..."></textarea>
       </div>
       <div class="buttons">
-        <button id="saveMorningBtn">Spremi jutarnji unos</button>
-        <button class="secondary" id="resetMorningBtn">Poništi polja</button>
+        <button id="saveMorningBtn">Spremi jutro</button>
+        <button class="secondary" id="resetMorningBtn">Poništi</button>
       </div>
     </div>
 
     <div id="morningSavedWrap" class="hidden">
       <div class="buttons">
-        <button class="success" disabled>Jutarnji podaci za danas uneseni</button>
-        <button class="secondary" id="editMorningBtn">Uredi današnji jutarnji unos</button>
+        <button class="success" disabled>Jutro uneseno</button>
+        <button class="secondary" id="editMorningBtn">Uredi</button>
       </div>
     </div>
 
-    <h3>Jutarnji komentar</h3>
-    <div id="morningComment" class="status">Nakon spremanja prikazat će se kratki jutarnji komentar.</div>
+    <h3>Komentar</h3>
+    <div id="morningComment" class="status">Komentar nakon spremanja.</div>
 
-    <h3>Kratki osvrt na jučer</h3>
-    <div id="yesterdaySummary" class="status">Ako nema jučerašnjih podataka, aplikacija će to jasno napisati.</div>
+    <h3>Jučer</h3>
+    <div id="yesterdaySummary" class="status">Osvrt nakon unosa.</div>
   </section>
 
   <section class="card hidden" id="eveningDashboard">
-    <h2>Večernji dashboard</h2>
-    <div id="eveningStatus" class="status">Večernji podaci još nisu uneseni za danas.</div>
+    <h2>Večer</h2>
+    <div id="eveningStatus" class="status">Večer nije unesena.</div>
 
     <div id="eveningFormWrap">
-      <h3>Večernje zatvaranje</h3>
+      <h3>Zatvaranje</h3>
       <div class="row three">
         <div>
-          <label for="eEnergy">Energija navečer (0–100)</label>
-          <input id="eEnergy" type="number" min="0" max="100" />
+          <label for="eEnergy">Kako se osjećaš (1–10)</label>
+          <input id="eEnergy" type="number" min="1" max="10" />
         </div>
         <div>
-          <label for="eStress">Stres dana (0–100)</label>
+          <label for="eStress">Stres (0–100)</label>
           <input id="eStress" type="number" min="0" max="100" />
         </div>
         <div>
-          <label for="eActivity">Aktivnost dana</label>
+          <label for="eActivity">Aktivnost</label>
           <select id="eActivity">
             <option value="">odaberi</option>
             <option value="niska">niska</option>
@@ -188,7 +175,7 @@
       </div>
       <div class="row three">
         <div>
-          <label for="eCramps">Grčevi tijekom dana</label>
+          <label for="eCramps">Grčevi</label>
           <select id="eCramps">
             <option value="">odaberi</option>
             <option value="nema">nema</option>
@@ -214,7 +201,7 @@
       </div>
       <div class="row two">
         <div>
-          <label for="eMood">Zaključak dana</label>
+          <label for="eMood">Kako je prošao dan</label>
           <select id="eMood">
             <option value="">odaberi</option>
             <option value="mirno">mirno</option>
@@ -224,7 +211,7 @@
           </select>
         </div>
         <div>
-          <label for="eSleepPlan">Plan za san</label>
+          <label for="eSleepPlan">San večeras</label>
           <select id="eSleepPlan">
             <option value="">odaberi</option>
             <option value="standardno">standardno</option>
@@ -235,34 +222,34 @@
       </div>
       <div>
         <label for="eNote">Napomena</label>
-        <textarea id="eNote" placeholder="Kratka večernja napomena..."></textarea>
+        <textarea id="eNote" placeholder="Napomena..."></textarea>
       </div>
       <div class="buttons">
-        <button id="saveEveningBtn">Spremi večernje zatvaranje</button>
-        <button class="secondary" id="resetEveningBtn">Poništi polja</button>
+        <button id="saveEveningBtn">Spremi večer</button>
+        <button class="secondary" id="resetEveningBtn">Poništi</button>
       </div>
     </div>
 
     <div id="eveningSavedWrap" class="hidden">
       <div class="buttons">
-        <button class="success" disabled>Večernji podaci za danas uneseni</button>
-        <button class="secondary" id="editEveningBtn">Uredi današnje večernje zatvaranje</button>
+        <button class="success" disabled>Večer unesena</button>
+        <button class="secondary" id="editEveningBtn">Uredi</button>
       </div>
     </div>
 
-    <h3>Večernji komentar</h3>
-    <div id="eveningComment" class="status">Nakon spremanja prikazat će se kratki večernji komentar.</div>
+    <h3>Komentar</h3>
+    <div id="eveningComment" class="status">Komentar nakon spremanja.</div>
 
-    <h3>Sažetak dana</h3>
-    <div id="todaySummary" class="status">Sažetak će se prikazati nakon unosa.</div>
+    <h3>Sažetak</h3>
+    <div id="todaySummary" class="status">Sažetak nakon unosa.</div>
   </section>
 
   <section class="card">
-    <h2>Pregled spremljenih podataka</h2>
-    <div id="dataPreview" class="muted small">Još nema spremljenih podataka.</div>
+    <h2>Podaci</h2>
+    <div id="dataPreview" class="muted small">Nema podataka.</div>
     <div class="buttons">
-      <button class="secondary" id="exportBtn">Izvoz JSON</button>
-      <button class="secondary" id="clearBtn">Obriši sve podatke</button>
+      <button class="secondary" id="exportBtn">Izvoz</button>
+      <button class="secondary" id="clearBtn">Obriši sve</button>
     </div>
     <div class="quote">„Red je pola posla.”</div>
   </section>
@@ -275,9 +262,9 @@
 
 <script>
 (function(){
-  const APP_VERSION = '1.2.1';
-  const STORAGE_KEY = 'fenix_s_records_v1_2_1';
-  const SETTINGS_KEY = 'fenix_s_settings_v1_2_1';
+  const APP_VERSION = '1.2.2';
+  const STORAGE_KEY = 'fenix_s_records_v1_2_2';
+  const SETTINGS_KEY = 'fenix_s_settings_v1_2_2';
 
   const $ = (id) => document.getElementById(id);
 
@@ -350,8 +337,6 @@
     const isMorning = mode === 'morning';
     $('morningDashboard').classList.toggle('hidden', !isMorning);
     $('eveningDashboard').classList.toggle('hidden', isMorning);
-    $('pillMorning').classList.toggle('active', isMorning);
-    $('pillEvening').classList.toggle('active', !isMorning);
     $('bottomMorningBtn').classList.toggle('success', isMorning);
     $('bottomEveningBtn').classList.toggle('success', !isMorning);
     const settings = loadSettings();
@@ -371,15 +356,14 @@
     const stress = Number(m.mStress);
     const bb = Number(m.mBodyBattery);
 
-    if (energy < 35 || bb < 30) parts.push('Kreni sporije i čuvaj prvi dio dana.');
-    else if (energy >= 65 && bb >= 60) parts.push('Jutro izgleda stabilno; iskoristi energiju bez forsiranja.');
+    if (energy <= 3 || bb < 30) parts.push('Kreni sporije i čuvaj prvi dio dana.');
+    else if (energy >= 7 && bb >= 60) parts.push('Jutro izgleda stabilno; iskoristi energiju bez forsiranja.');
     else parts.push('Jutro je za umjeren ritam i realan plan.');
 
-    if (sleep <= 4) parts.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
+    if (sleep < 50) parts.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
     if (stress >= 60) parts.push('Stres je povišen; koristi kraće pauze i jednostavniji raspored.');
     if (m.mCramps && m.mCramps !== 'nema') parts.push(`Noćni grčevi su zabilježeni kao ${m.mCramps}; prati vodu, opterećenje i večernji ritam.`);
 
-    // Važno pravilo: ako boli nema, bol se uopće ne spominje.
     if (m.mPain && m.mPain !== 'nema') {
       if (m.mPain === 'blaga') parts.push('Blaga bol je zabilježena; ostani u mirnijem tempu.');
       else parts.push(`Bol je zabilježena kao ${m.mPain}; nemoj forsirati i po potrebi se konzultiraj sa stručnom osobom.`);
@@ -396,13 +380,12 @@
     const water = Number(e.eWater);
 
     if (e.eMood === 'preopterećeno' || e.eActivity === 'previsoka') parts.push('Dan je bio jači nego što tijelo vjerojatno treba; večer zatvori mirno i bez dodatnog opterećenja.');
-    else if (energy >= 50 && stress < 50) parts.push('Dan je zatvoren stabilno.');
+    else if (energy >= 6 && stress < 50) parts.push('Dan je zatvoren stabilno.');
     else parts.push('Dan je zatvoren; sada je najvažnije smirivanje ritma.');
 
     if (stress >= 60) parts.push('Stres je bio povišen, pa neka večer bude što jednostavnija.');
     if (e.eCramps && e.eCramps !== 'nema') parts.push(`Grčevi su zabilježeni kao ${e.eCramps}; obrati pažnju na vodu, opterećenje i opuštanje prije spavanja.`);
 
-    // Važno pravilo: ako boli nema, bol se uopće ne spominje.
     if (e.ePain && e.ePain !== 'nema') {
       if (e.ePain === 'blaga') parts.push('Blaga bol je zabilježena; večeras bez forsiranja.');
       else parts.push(`Bol je zabilježena kao ${e.ePain}; večeras smanji opterećenje i po potrebi potraži stručni savjet.`);
@@ -425,8 +408,8 @@
       return;
     }
     const lines = [];
-    if(y.morning) lines.push(`Jutro: energija ${y.morning.mEnergy}, san ${y.morning.mSleep}/10, oporavak ${y.morning.mBodyBattery}.`);
-    if(y.evening) lines.push(`Večer: energija ${y.evening.eEnergy}, stres ${y.evening.eStress}, aktivnost ${y.evening.eActivity}.`);
+    if(y.morning) lines.push(`Jutro: osjećaj ${y.morning.mEnergy}/10, san ${y.morning.mSleep}/100, BB ${y.morning.mBodyBattery}.`);
+    if(y.evening) lines.push(`Večer: osjećaj ${y.evening.eEnergy}/10, stres ${y.evening.eStress}, aktivnost ${y.evening.eActivity}.`);
     box.textContent = lines.length ? lines.join(' ') : `Za ${displayDate(yKey)} postoje podaci, ali nisu potpuni.`;
     statusClass(box, 'ok');
   }
@@ -436,13 +419,13 @@
     const r = records[today];
     const box = $('todaySummary');
     if(!r){
-      box.textContent = 'Za danas još nema spremljenih podataka.';
+      box.textContent = 'Danas još nema podataka.';
       statusClass(box, 'warn');
       return;
     }
     const lines = [];
-    if(r.morning) lines.push(`Jutro: energija ${r.morning.mEnergy}, san ${r.morning.mSleep}/10, oporavak ${r.morning.mBodyBattery}.`);
-    if(r.evening) lines.push(`Večer: energija ${r.evening.eEnergy}, stres ${r.evening.eStress}, aktivnost ${r.evening.eActivity}, voda ${r.evening.eWater} L.`);
+    if(r.morning) lines.push(`Jutro: osjećaj ${r.morning.mEnergy}/10, san ${r.morning.mSleep}/100, BB ${r.morning.mBodyBattery}.`);
+    if(r.evening) lines.push(`Večer: osjećaj ${r.evening.eEnergy}/10, stres ${r.evening.eStress}, aktivnost ${r.evening.eActivity}, voda ${r.evening.eWater} L.`);
     box.textContent = lines.length ? lines.join(' ') : 'Danas nema potpunog sažetka.';
     statusClass(box, lines.length ? 'ok' : 'warn');
   }
@@ -452,34 +435,34 @@
     const r = records[today] || {};
 
     if(r.morning){
-      $('morningStatus').textContent = `Jutarnji podaci uneseni za ${displayDate(today)}.`;
+      $('morningStatus').textContent = `Jutro uneseno za ${displayDate(today)}.`;
       statusClass($('morningStatus'), 'ok');
       $('morningFormWrap').classList.add('hidden');
       $('morningSavedWrap').classList.remove('hidden');
       $('morningComment').textContent = r.morningComment || buildMorningComment(r.morning);
       statusClass($('morningComment'), 'ok');
     } else {
-      $('morningStatus').textContent = 'Jutarnji podaci još nisu uneseni za danas.';
+      $('morningStatus').textContent = 'Jutro nije uneseno.';
       statusClass($('morningStatus'), 'warn');
       $('morningFormWrap').classList.remove('hidden');
       $('morningSavedWrap').classList.add('hidden');
-      $('morningComment').textContent = 'Nakon spremanja prikazat će se kratki jutarnji komentar.';
+      $('morningComment').textContent = 'Komentar nakon spremanja.';
       statusClass($('morningComment'), '');
     }
 
     if(r.evening){
-      $('eveningStatus').textContent = `Večernji podaci uneseni za ${displayDate(today)}.`;
+      $('eveningStatus').textContent = `Večer unesena za ${displayDate(today)}.`;
       statusClass($('eveningStatus'), 'ok');
       $('eveningFormWrap').classList.add('hidden');
       $('eveningSavedWrap').classList.remove('hidden');
       $('eveningComment').textContent = r.eveningComment || buildEveningComment(r.evening);
       statusClass($('eveningComment'), 'ok');
     } else {
-      $('eveningStatus').textContent = 'Večernji podaci još nisu uneseni za danas.';
+      $('eveningStatus').textContent = 'Večer nije unesena.';
       statusClass($('eveningStatus'), 'warn');
       $('eveningFormWrap').classList.remove('hidden');
       $('eveningSavedWrap').classList.add('hidden');
-      $('eveningComment').textContent = 'Nakon spremanja prikazat će se kratki večernji komentar.';
+      $('eveningComment').textContent = 'Komentar nakon spremanja.';
       statusClass($('eveningComment'), '');
     }
 
@@ -493,7 +476,7 @@
     const keys = Object.keys(records).sort().reverse();
     const box = $('dataPreview');
     if(!keys.length){
-      box.textContent = 'Još nema spremljenih podataka.';
+      box.textContent = 'Nema podataka.';
       return;
     }
     const html = keys.slice(0,7).map(k => {
@@ -515,7 +498,6 @@
     records[today].updatedAt = new Date().toISOString();
     saveRecords(records);
 
-    // Nakon spremanja forma se vraća na početne vrijednosti.
     resetMorningForm();
     refreshUI();
   }
@@ -530,7 +512,6 @@
     records[today].updatedAt = new Date().toISOString();
     saveRecords(records);
 
-    // Nakon spremanja forma se vraća na početne vrijednosti.
     resetEveningForm();
     refreshUI();
   }
@@ -571,8 +552,6 @@
     refreshUI();
   }
 
-  $('showMorningBtn').addEventListener('click', () => showMode('morning'));
-  $('showEveningBtn').addEventListener('click', () => showMode('evening'));
   $('bottomMorningBtn').addEventListener('click', () => showMode('morning'));
   $('bottomEveningBtn').addEventListener('click', () => showMode('evening'));
   $('saveMorningBtn').addEventListener('click', saveMorning);
