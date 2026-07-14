@@ -3,572 +3,343 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>FENIX S App V1.2.2</title>
+  <title>FENIX S App V1.3.0</title>
   <style>
     :root{
-      --bg:#07111f;
-      --panel:#0f1b2d;
-      --panel2:#12243b;
-      --text:#f8fafc;
-      --muted:#94a3b8;
-      --accent:#f59e0b;
-      --green:#22c55e;
-      --yellow:#facc15;
-      --red:#ef4444;
-      --blue:#38bdf8;
-      --line:#28415f;
-      --input:#081827;
+      --bg:#07111f;--panel:#0f1b2d;--panel2:#12243b;--text:#f8fafc;
+      --muted:#ffffff;--garmin:#38bdf8;--garmin-bg:#0b2940;--accent:#f59e0b;--green:#22c55e;--yellow:#facc15;
+      --red:#ef4444;--line:#28415f;--input:#081827;
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.35}
     header{position:sticky;top:0;z-index:10;background:#020617;border-bottom:1px solid var(--line);padding:12px 14px}
     h1{font-size:20px;margin:0;color:var(--accent)}
-    .subtitle{font-size:12px;color:var(--muted);margin-top:3px}
-    main{padding:14px;max-width:860px;margin:0 auto 80px}
+    .subtitle{font-size:12px;color:var(--text);margin-top:3px}
+    main{padding:14px;max-width:860px;margin:0 auto 94px}
     .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
-    .card h2{font-size:18px;margin:0 0 10px;color:#fff}
-    .card h3{font-size:15px;margin:10px 0 8px;color:#fff}
+    .card h2{font-size:18px;margin:0 0 12px;color:#fff}
+    .card h3{font-size:15px;margin:12px 0 8px;color:#fff}
     .row{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px}
     @media(min-width:720px){.row.two{grid-template-columns:1fr 1fr}.row.three{grid-template-columns:1fr 1fr 1fr}}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+    label{display:block;font-size:13px;color:var(--text);margin-bottom:5px}
     input,select,textarea{width:100%;background:var(--input);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:15px;outline:none}
+    input[type="date"]{color-scheme:dark}
     textarea{min-height:72px;resize:vertical}
     button{border:0;border-radius:12px;padding:11px 13px;font-size:15px;font-weight:700;cursor:pointer;color:#07111f;background:var(--accent)}
     button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
     button.success{background:var(--green);color:#052e16}
     button:disabled{opacity:.78;cursor:not-allowed}
     .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:13px;margin:3px 4px 3px 0}
-    .pill.active{color:#07111f;background:var(--accent);border-color:var(--accent);font-weight:700}
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
-    .status{border-left:4px solid var(--accent);padding:10px;background:#0b1f34;border-radius:12px;margin-top:10px}
+    .status{border-left:4px solid var(--accent);padding:10px;background:#0b1f34;border-radius:12px;margin-top:8px}
     .ok{border-left-color:var(--green)}
     .warn{border-left-color:var(--yellow)}
-    .bad{border-left-color:var(--red)}
+
+    .garmin-field{background:var(--garmin-bg);border:1px solid var(--garmin)}
+    .garmin-label{color:var(--garmin);font-weight:700}
+    .garmin-badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;background:var(--garmin-bg);border:1px solid var(--garmin);color:var(--garmin);font-size:11px;font-weight:700}
     .hidden{display:none!important}
-    .kv{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid rgba(148,163,184,.18);padding:7px 0;font-size:14px}
+    .muted{color:var(--text)}
+    .small{font-size:13px}
+    .kv{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid rgba(255,255,255,.22);padding:7px 0;font-size:14px}
     .kv:last-child{border-bottom:0}
-    .footer-nav{position:fixed;left:0;right:0;bottom:0;background:#020617;border-top:1px solid var(--line);padding:10px 14px;display:flex;gap:10px;justify-content:center;z-index:20}
-    .footer-nav button{max-width:230px;width:50%}
-    .quote{font-style:italic;color:#cbd5e1;border-left:3px solid var(--line);padding-left:10px;margin-top:10px}
+    .datebar{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:end}
+    .datebar button{padding:10px 12px}
+    .modebar{position:fixed;left:0;right:0;bottom:0;background:#020617;border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center;z-index:20}
+    .modebar button{max-width:320px;width:50%;white-space:nowrap;font-size:14px}
+    .modebar button.active{background:var(--accent);color:#07111f;border-color:var(--accent)}
+    .sectionTitle{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .sectionTitle h2{margin:0}
+    .tag{font-size:13px;font-weight:700;border-radius:999px;padding:6px 9px;background:var(--panel2);color:var(--text);border:1px solid var(--line);white-space:nowrap}
+    .tag.done{background:rgba(34,197,94,.17);color:#86efac;border-color:rgba(34,197,94,.45)}
   </style>
 </head>
 <body>
 <header>
-  <h1>FENIX S App V1.2.2</h1>
-  <div class="subtitle" id="todayLabel">Danas</div>
+  <h1>FENIX S App V1.3.0</h1>
+  <div class="subtitle" id="headerDate">Danas</div>
 </header>
 
 <main>
-  <section class="card" id="morningDashboard">
-    <h2>Jutro</h2>
-    <div id="morningStatus" class="status">Jutro nije uneseno.</div>
-
-    <div id="morningFormWrap">
-      <h3>Unos</h3>
-      <div class="row three">
-        <div>
-          <label for="mEnergy">Kako se osjećaš (1–10)</label>
-          <input id="mEnergy" type="number" min="1" max="10" />
-        </div>
-        <div>
-          <label for="mSleep">Kvaliteta sna (0–100)</label>
-          <input id="mSleep" type="number" min="0" max="100" />
-        </div>
-        <div>
-          <label for="mBodyBattery">Body Battery (0–100)</label>
-          <input id="mBodyBattery" type="number" min="0" max="100" />
-        </div>
-      </div>
-      <div class="row three">
-        <div>
-          <label for="mStress">Stres (0–100)</label>
-          <input id="mStress" type="number" min="0" max="100" />
-        </div>
-        <div>
-          <label for="mCramps">Grčevi noću</label>
-          <select id="mCramps">
-            <option value="">odaberi</option>
-            <option value="nema">nema</option>
-            <option value="blagi">blagi</option>
-            <option value="srednji">srednji</option>
-            <option value="jaki">jaki</option>
-          </select>
-        </div>
-        <div>
-          <label for="mPain">Bol</label>
-          <select id="mPain">
-            <option value="">odaberi</option>
-            <option value="nema">nema</option>
-            <option value="blaga">blaga</option>
-            <option value="srednja">srednja</option>
-            <option value="jaka">jaka</option>
-          </select>
-        </div>
-      </div>
-      <div class="row two">
-        <div>
-          <label for="mWater">Voda (L)</label>
-          <input id="mWater" type="number" step="0.1" min="0" />
-        </div>
-        <div>
-          <label for="mMood">Jutarnji osjećaj</label>
-          <select id="mMood">
-            <option value="">odaberi</option>
-            <option value="mirno">mirno</option>
-            <option value="umorno">umorno</option>
-            <option value="nestabilno">nestabilno</option>
-            <option value="dobro">dobro</option>
-          </select>
-        </div>
-      </div>
+  <section class="card">
+    <div class="datebar">
+      <button class="secondary" id="prevDayBtn" aria-label="Prethodni dan">‹</button>
       <div>
-        <label for="mNote">Napomena</label>
-        <textarea id="mNote" placeholder="Napomena..."></textarea>
+        <label for="recordDate">Datum zapisa</label>
+        <input id="recordDate" type="date" />
       </div>
-      <div class="buttons">
-        <button id="saveMorningBtn">Spremi jutro</button>
-        <button class="secondary" id="resetMorningBtn">Poništi</button>
-      </div>
+      <button class="secondary" id="todayBtn">Danas</button>
     </div>
-
-    <div id="morningSavedWrap" class="hidden">
-      <div class="buttons">
-        <button class="success" disabled>Jutro uneseno</button>
-        <button class="secondary" id="editMorningBtn">Uredi</button>
-      </div>
-    </div>
-
-    <h3>Komentar</h3>
-    <div id="morningComment" class="status">Komentar nakon spremanja.</div>
-
-    <h3>Jučer</h3>
-    <div id="yesterdaySummary" class="status">Osvrt nakon unosa.</div>
   </section>
 
-  <section class="card hidden" id="eveningDashboard">
-    <h2>Večer</h2>
-    <div id="eveningStatus" class="status">Večer nije unesena.</div>
+  <section class="card" id="morningSection">
+    <div class="sectionTitle">
+      <h2>Jutro</h2>
+      <span class="tag" id="morningTag">otvoreno</span>
+    </div>
 
-    <div id="eveningFormWrap">
-      <h3>Zatvaranje</h3>
+    <div id="morningFormWrap">
       <div class="row three">
-        <div>
-          <label for="eEnergy">Kako se osjećaš (1–10)</label>
-          <input id="eEnergy" type="number" min="1" max="10" />
-        </div>
-        <div>
-          <label for="eStress">Stres (0–100)</label>
-          <input id="eStress" type="number" min="0" max="100" />
-        </div>
-        <div>
-          <label for="eActivity">Aktivnost</label>
-          <select id="eActivity">
-            <option value="">odaberi</option>
-            <option value="niska">niska</option>
-            <option value="umjerena">umjerena</option>
-            <option value="visoka">visoka</option>
-            <option value="previsoka">previsoka</option>
-          </select>
-        </div>
+        <div><label for="mEnergy">Kako se osjećaš (1–10)</label><input id="mEnergy" type="number" min="1" max="10" /></div>
+        <div><label class="garmin-label" for="mSleep">Kvaliteta sna (0–100)<span class="garmin-badge">Garmin</span></label><input class="garmin-field" id="mSleep" type="number" min="0" max="100" /></div>
+        <div><label class="garmin-label" for="mBodyBattery">Body Battery (0–100)<span class="garmin-badge">Garmin</span></label><input class="garmin-field" id="mBodyBattery" type="number" min="0" max="100" /></div>
       </div>
       <div class="row three">
-        <div>
-          <label for="eCramps">Grčevi</label>
-          <select id="eCramps">
-            <option value="">odaberi</option>
-            <option value="nema">nema</option>
-            <option value="blagi">blagi</option>
-            <option value="srednji">srednji</option>
-            <option value="jaki">jaki</option>
-          </select>
-        </div>
-        <div>
-          <label for="ePain">Bol</label>
-          <select id="ePain">
-            <option value="">odaberi</option>
-            <option value="nema">nema</option>
-            <option value="blaga">blaga</option>
-            <option value="srednja">srednja</option>
-            <option value="jaka">jaka</option>
-          </select>
-        </div>
-        <div>
-          <label for="eWater">Voda danas (L)</label>
-          <input id="eWater" type="number" step="0.1" min="0" />
-        </div>
+        <div><label for="mCramps">Grčevi noću</label><select id="mCramps"><option value="">odaberi</option><option value="nema">nema</option><option value="blagi">blagi</option><option value="srednji">srednji</option><option value="jaki">jaki</option></select></div>
+        <div><label for="mPain">Bol</label><select id="mPain"><option value="">odaberi</option><option value="nema">nema</option><option value="blaga">blaga</option><option value="srednja">srednja</option><option value="jaka">jaka</option></select></div>
       </div>
       <div class="row two">
-        <div>
-          <label for="eMood">Kako je prošao dan</label>
-          <select id="eMood">
-            <option value="">odaberi</option>
-            <option value="mirno">mirno</option>
-            <option value="dobro">dobro</option>
-            <option value="umorno">umorno</option>
-            <option value="preopterećeno">preopterećeno</option>
-          </select>
-        </div>
-        <div>
-          <label for="eSleepPlan">San večeras</label>
-          <select id="eSleepPlan">
-            <option value="">odaberi</option>
-            <option value="standardno">standardno</option>
-            <option value="ranije_spavanje">ranije spavanje</option>
-            <option value="mirnija_vecer">mirnija večer</option>
-          </select>
-        </div>
+        <div><label for="mMood">Jutarnji osjećaj</label><select id="mMood"><option value="">odaberi</option><option value="mirno">mirno</option><option value="umorno">umorno</option><option value="nestabilno">nestabilno</option><option value="dobro">dobro</option></select></div>
       </div>
-      <div>
-        <label for="eNote">Napomena</label>
-        <textarea id="eNote" placeholder="Napomena..."></textarea>
-      </div>
-      <div class="buttons">
-        <button id="saveEveningBtn">Spremi večer</button>
-        <button class="secondary" id="resetEveningBtn">Poništi</button>
-      </div>
+      <div><label for="mNote">Napomena</label><textarea id="mNote" placeholder="Napomena..."></textarea></div>
+      <div class="buttons"><button id="saveMorningBtn">Spremi jutro</button><button class="secondary" id="resetMorningBtn">Poništi</button></div>
     </div>
 
-    <div id="eveningSavedWrap" class="hidden">
-      <div class="buttons">
-        <button class="success" disabled>Večer unesena</button>
-        <button class="secondary" id="editEveningBtn">Uredi</button>
-      </div>
+    <div id="morningSavedWrap" class="hidden"><div class="buttons"><button class="secondary" id="editMorningBtn">Uredi jutro</button></div></div>
+    <div id="morningCommentWrap" class="hidden"><h3>Komentar</h3><div id="morningComment" class="status ok"></div></div>
+    <div id="yesterdayWrap" class="hidden"><h3>Jučer</h3><div id="yesterdaySummary" class="status"></div></div>
+  </section>
+
+  <section class="card hidden" id="eveningSection">
+    <div class="sectionTitle">
+      <h2>Večer</h2>
+      <span class="tag" id="eveningTag">otvorena</span>
     </div>
 
-    <h3>Komentar</h3>
-    <div id="eveningComment" class="status">Komentar nakon spremanja.</div>
+    <div id="eveningFormWrap">
+      <div class="row three">
+        <div><label for="eEnergy">Kako se osjećaš (1–10)</label><input id="eEnergy" type="number" min="1" max="10" /></div>
+        <div><label for="eStress">Stres (0–100)</label><input id="eStress" type="number" min="0" max="100" /></div>
+        <div><label for="eActivity">Aktivnost</label><select id="eActivity"><option value="">odaberi</option><option value="niska">niska</option><option value="umjerena">umjerena</option><option value="visoka">visoka</option><option value="previsoka">previsoka</option></select></div>
+      </div>
+      <div class="row three">
+        <div><label for="eCramps">Grčevi</label><select id="eCramps"><option value="">odaberi</option><option value="nema">nema</option><option value="blagi">blagi</option><option value="srednji">srednji</option><option value="jaki">jaki</option></select></div>
+        <div><label for="ePain">Bol</label><select id="ePain"><option value="">odaberi</option><option value="nema">nema</option><option value="blaga">blaga</option><option value="srednja">srednja</option><option value="jaka">jaka</option></select></div>
+        <div><label for="eWater">Voda danas (L)</label><input id="eWater" type="number" step="0.1" min="0" /></div>
+      </div>
+      <div class="row two">
+        <div><label for="eMood">Kako je prošao dan</label><select id="eMood"><option value="">odaberi</option><option value="mirno">mirno</option><option value="dobro">dobro</option><option value="umorno">umorno</option><option value="preopterećeno">preopterećeno</option></select></div>
+        <div><label for="eSleepPlan">San večeras</label><select id="eSleepPlan"><option value="">odaberi</option><option value="standardno">standardno</option><option value="ranije_spavanje">ranije spavanje</option><option value="mirnija_vecer">mirnija večer</option></select></div>
+      </div>
+      <div><label for="eNote">Napomena</label><textarea id="eNote" placeholder="Napomena..."></textarea></div>
+      <div class="buttons"><button id="saveEveningBtn">Spremi večer</button><button class="secondary" id="resetEveningBtn">Poništi</button></div>
+    </div>
 
-    <h3>Sažetak</h3>
-    <div id="todaySummary" class="status">Sažetak nakon unosa.</div>
+    <div id="eveningSavedWrap" class="hidden"><div class="buttons"><button class="secondary" id="editEveningBtn">Uredi večer</button></div></div>
+    <div id="eveningCommentWrap" class="hidden"><h3>Komentar</h3><div id="eveningComment" class="status ok"></div></div>
+    <div id="todaySummaryWrap" class="hidden"><h3>Sažetak</h3><div id="todaySummary" class="status ok"></div></div>
   </section>
 
   <section class="card">
     <h2>Podaci</h2>
     <div id="dataPreview" class="muted small">Nema podataka.</div>
-    <div class="buttons">
-      <button class="secondary" id="exportBtn">Izvoz</button>
-      <button class="secondary" id="clearBtn">Obriši sve</button>
-    </div>
-    <div class="quote">„Red je pola posla.”</div>
+    <div class="buttons"><button class="secondary" id="exportBtn">Izvoz</button><button class="secondary" id="clearBtn">Obriši sve</button></div>
   </section>
 </main>
 
-<div class="footer-nav">
-  <button id="bottomMorningBtn" class="secondary">Jutro</button>
-  <button id="bottomEveningBtn" class="secondary">Večer</button>
+<div class="modebar">
+  <button id="morningModeBtn" class="secondary">Jutro – otvoreno</button>
+  <button id="eveningModeBtn" class="secondary">Večer – otvorena</button>
 </div>
 
 <script>
 (function(){
-  const APP_VERSION = '1.2.2';
-  const STORAGE_KEY = 'fenix_s_records_v1_2_2';
-  const SETTINGS_KEY = 'fenix_s_settings_v1_2_2';
+  const APP_VERSION='1.3.0';
+  const STORAGE_KEY='fenix_s_records_v1_2_2';
+  const SETTINGS_KEY='fenix_s_settings_v1_2_3';
+  const $=id=>document.getElementById(id);
+  const pad=n=>String(n).padStart(2,'0');
+  const dateKey=(d=new Date())=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const displayDate=key=>{const [y,m,d]=key.split('-');return `${d}.${m}.${y}.`;};
+  const todayKey=()=>dateKey(new Date());
+  const previousDay=key=>{const d=new Date(key+'T12:00:00');d.setDate(d.getDate()-1);return dateKey(d);};
+  const loadRecords=()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch{return {};}};
+  const saveRecords=r=>localStorage.setItem(STORAGE_KEY,JSON.stringify(r));
+  const loadSettings=()=>{try{return JSON.parse(localStorage.getItem(SETTINGS_KEY))||{};}catch{return {};}};
+  const saveSettings=s=>localStorage.setItem(SETTINGS_KEY,JSON.stringify(s));
 
-  const $ = (id) => document.getElementById(id);
+  let selectedDate=todayKey();
+  let mode='morning';
+  let manualDateSelection=false;
 
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function dateKey(d=new Date()){
-    return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
-  }
-  function displayDate(key){
-    const [y,m,d] = key.split('-');
-    return `${d}.${m}.${y}.`;
-  }
-  function yesterdayKey(){
-    const d = new Date();
-    d.setDate(d.getDate()-1);
-    return dateKey(d);
-  }
-  function loadRecords(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch(e){ return {}; }
-  }
-  function saveRecords(records){ localStorage.setItem(STORAGE_KEY, JSON.stringify(records)); }
-  function loadSettings(){
-    try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; }
-    catch(e){ return {}; }
-  }
-  function saveSettings(settings){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
-
-  const today = dateKey();
-  $('todayLabel').textContent = `Danas je ${displayDate(today)} · V${APP_VERSION}`;
-
-  const defaults = {
-    morning: {
-      mEnergy: '', mSleep: '', mBodyBattery: '', mStress: '',
-      mCramps: '', mPain: '', mWater: '', mMood: '', mNote: ''
-    },
-    evening: {
-      eEnergy: '', eStress: '', eActivity: '', eCramps: '',
-      ePain: '', eWater: '', eMood: '', eSleepPlan: '', eNote: ''
-    }
+  const defaults={
+    morning:{mEnergy:'',mSleep:'',mBodyBattery:'',mCramps:'',mPain:'',mMood:'',mNote:''},
+    evening:{eEnergy:'',eStress:'',eActivity:'',eCramps:'',ePain:'',eWater:'',eMood:'',eSleepPlan:'',eNote:''}
   };
+  const requiredMorning=['mEnergy','mSleep','mBodyBattery','mCramps','mPain','mMood'];
+  const requiredEvening=['eEnergy','eStress','eActivity','eCramps','ePain','eWater','eMood','eSleepPlan'];
 
-  const requiredMorning = ['mEnergy','mSleep','mBodyBattery','mStress','mCramps','mPain','mWater','mMood'];
-  const requiredEvening = ['eEnergy','eStress','eActivity','eCramps','ePain','eWater','eMood','eSleepPlan'];
-
-  function validateRequired(data, ids, label){
-    const missing = ids.filter(id => data[id] === '' || data[id] === null || typeof data[id] === 'undefined');
-    if(missing.length){
-      alert(label + ': molim unesite sva ključna polja prije spremanja.');
-      return false;
-    }
-    return true;
-  }
-
-  function setFormValues(values){
-    Object.entries(values).forEach(([id,val]) => { if($(id)) $(id).value = val; });
-  }
-  function getFormValues(ids){
-    const out = {};
-    ids.forEach(id => out[id] = $(id).value);
-    return out;
-  }
-  function resetMorningForm(){ setFormValues(defaults.morning); }
-  function resetEveningForm(){ setFormValues(defaults.evening); }
-
-  function statusClass(el, type){
-    el.className = 'status' + (type ? ' ' + type : '');
-  }
-
-  function showMode(mode){
-    const isMorning = mode === 'morning';
-    $('morningDashboard').classList.toggle('hidden', !isMorning);
-    $('eveningDashboard').classList.toggle('hidden', isMorning);
-    $('bottomMorningBtn').classList.toggle('success', isMorning);
-    $('bottomEveningBtn').classList.toggle('success', !isMorning);
-    const settings = loadSettings();
-    settings.mode = mode;
-    saveSettings(settings);
-  }
-
-  function automaticMode(){
-    const hour = new Date().getHours();
-    return (hour >= 4 && hour < 14) ? 'morning' : 'evening';
-  }
+  function setFormValues(values){Object.entries(values).forEach(([id,v])=>{if($(id))$(id).value=v??'';});}
+  function getFormValues(ids){const o={};ids.forEach(id=>o[id]=$(id).value);return o;}
+  function resetMorningForm(){setFormValues(defaults.morning);}
+  function resetEveningForm(){setFormValues(defaults.evening);}
+  function validate(data,ids,label){if(ids.some(id=>data[id]==='')){alert(label+': unesite sva ključna polja.');return false;}return true;}
 
   function buildMorningComment(m){
-    const parts = [];
-    const energy = Number(m.mEnergy);
-    const sleep = Number(m.mSleep);
-    const stress = Number(m.mStress);
-    const bb = Number(m.mBodyBattery);
-
-    if (energy <= 3 || bb < 30) parts.push('Kreni sporije i čuvaj prvi dio dana.');
-    else if (energy >= 7 && bb >= 60) parts.push('Jutro izgleda stabilno; iskoristi energiju bez forsiranja.');
-    else parts.push('Jutro je za umjeren ritam i realan plan.');
-
-    if (sleep < 50) parts.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
-    if (stress >= 60) parts.push('Stres je povišen; koristi kraće pauze i jednostavniji raspored.');
-    if (m.mCramps && m.mCramps !== 'nema') parts.push(`Noćni grčevi su zabilježeni kao ${m.mCramps}; prati vodu, opterećenje i večernji ritam.`);
-
-    if (m.mPain && m.mPain !== 'nema') {
-      if (m.mPain === 'blaga') parts.push('Blaga bol je zabilježena; ostani u mirnijem tempu.');
-      else parts.push(`Bol je zabilježena kao ${m.mPain}; nemoj forsirati i po potrebi se konzultiraj sa stručnom osobom.`);
-    }
-
-    if (Number(m.mWater) < 1.5) parts.push('Unos vode je niži; danas ciljaj ravnomjernije piti kroz dan.');
-    return parts.join(' ');
+    const p=[],energy=Number(m.mEnergy),sleep=Number(m.mSleep),bb=Number(m.mBodyBattery);
+    if(energy<=3||bb<30)p.push('Kreni sporije i čuvaj prvi dio dana.');
+    else if(energy>=7&&bb>=60)p.push('Jutro izgleda stabilno; iskoristi energiju bez forsiranja.');
+    else p.push('Jutro je za umjeren ritam i realan plan.');
+    if(sleep<50)p.push('San je bio slabiji, pa danas smanji nepotreban pritisak.');
+    if(m.mCramps&&m.mCramps!=='nema')p.push(`Noćni grčevi: ${m.mCramps}.`);
+    if(m.mPain&&m.mPain!=='nema')p.push(m.mPain==='blaga'?'Zabilježena je blaga bol; ostani u mirnijem tempu.':`Bol je ${m.mPain}; nemoj forsirati.`);
+    return p.join(' ');
   }
 
   function buildEveningComment(e){
-    const parts = [];
-    const energy = Number(e.eEnergy);
-    const stress = Number(e.eStress);
-    const water = Number(e.eWater);
-
-    if (e.eMood === 'preopterećeno' || e.eActivity === 'previsoka') parts.push('Dan je bio jači nego što tijelo vjerojatno treba; večer zatvori mirno i bez dodatnog opterećenja.');
-    else if (energy >= 6 && stress < 50) parts.push('Dan je zatvoren stabilno.');
-    else parts.push('Dan je zatvoren; sada je najvažnije smirivanje ritma.');
-
-    if (stress >= 60) parts.push('Stres je bio povišen, pa neka večer bude što jednostavnija.');
-    if (e.eCramps && e.eCramps !== 'nema') parts.push(`Grčevi su zabilježeni kao ${e.eCramps}; obrati pažnju na vodu, opterećenje i opuštanje prije spavanja.`);
-
-    if (e.ePain && e.ePain !== 'nema') {
-      if (e.ePain === 'blaga') parts.push('Blaga bol je zabilježena; večeras bez forsiranja.');
-      else parts.push(`Bol je zabilježena kao ${e.ePain}; večeras smanji opterećenje i po potrebi potraži stručni savjet.`);
-    }
-
-    if (water < 1.5) parts.push('Voda je danas bila niža; sutra kreni ranije s ravnomjernim unosom.');
-    if (e.eSleepPlan === 'ranije_spavanje') parts.push('Plan ranijeg spavanja je dobar izbor za oporavak.');
-    if (e.eSleepPlan === 'mirnija_vecer') parts.push('Mirnija večer može pomoći boljem prijelazu u san.');
-    return parts.join(' ');
+    const p=[],energy=Number(e.eEnergy),stress=Number(e.eStress),water=Number(e.eWater);
+    if(e.eMood==='preopterećeno'||e.eActivity==='previsoka')p.push('Dan je bio zahtjevan; večer zatvori mirno.');
+    else if(energy>=6&&stress<50)p.push('Dan je zatvoren stabilno.');
+    else p.push('Dan je zatvoren; sada je najvažnije smirivanje ritma.');
+    if(e.eCramps&&e.eCramps!=='nema')p.push(`Grčevi: ${e.eCramps}.`);
+    if(e.ePain&&e.ePain!=='nema')p.push(e.ePain==='blaga'?'Zabilježena je blaga bol; večeras bez forsiranja.':`Bol je ${e.ePain}; smanji opterećenje.`);
+    if(water<1.5)p.push('Voda je danas bila niža; sutra kreni ranije s ravnomjernim unosom.');
+    if(e.eSleepPlan==='ranije_spavanje')p.push('Ranije spavanje je dobar izbor za oporavak.');
+    if(e.eSleepPlan==='mirnija_vecer')p.push('Mirnija večer može pomoći prijelazu u san.');
+    return p.join(' ');
   }
 
-  function buildYesterdaySummary(){
-    const records = loadRecords();
-    const yKey = yesterdayKey();
-    const y = records[yKey];
-    const box = $('yesterdaySummary');
-    if(!y){
-      box.textContent = `Za ${displayDate(yKey)} nema spremljenih podataka. To je u redu; današnji unos će biti nova početna točka.`;
-      statusClass(box, 'warn');
-      return;
-    }
-    const lines = [];
-    if(y.morning) lines.push(`Jutro: osjećaj ${y.morning.mEnergy}/10, san ${y.morning.mSleep}/100, BB ${y.morning.mBodyBattery}.`);
-    if(y.evening) lines.push(`Večer: osjećaj ${y.evening.eEnergy}/10, stres ${y.evening.eStress}, aktivnost ${y.evening.eActivity}.`);
-    box.textContent = lines.length ? lines.join(' ') : `Za ${displayDate(yKey)} postoje podaci, ali nisu potpuni.`;
-    statusClass(box, 'ok');
+  function setMode(nextMode){
+    mode=nextMode;
+    $('morningSection').classList.toggle('hidden',mode!=='morning');
+    $('eveningSection').classList.toggle('hidden',mode!=='evening');
+    $('morningModeBtn').classList.toggle('active',mode==='morning');
+    $('eveningModeBtn').classList.toggle('active',mode==='evening');
+    const s=loadSettings();s.mode=mode;saveSettings(s);
   }
 
-  function buildTodaySummary(){
-    const records = loadRecords();
-    const r = records[today];
-    const box = $('todaySummary');
-    if(!r){
-      box.textContent = 'Danas još nema podataka.';
-      statusClass(box, 'warn');
-      return;
-    }
-    const lines = [];
-    if(r.morning) lines.push(`Jutro: osjećaj ${r.morning.mEnergy}/10, san ${r.morning.mSleep}/100, BB ${r.morning.mBodyBattery}.`);
-    if(r.evening) lines.push(`Večer: osjećaj ${r.evening.eEnergy}/10, stres ${r.evening.eStress}, aktivnost ${r.evening.eActivity}, voda ${r.evening.eWater} L.`);
-    box.textContent = lines.length ? lines.join(' ') : 'Danas nema potpunog sažetka.';
-    statusClass(box, lines.length ? 'ok' : 'warn');
+  function updateDateHeader(){
+    const isToday=selectedDate===todayKey();
+    $('headerDate').textContent=`${isToday?'Danas':'Odabrano'}: ${displayDate(selectedDate)} · V${APP_VERSION}`;
+    $('recordDate').value=selectedDate;
+    $('recordDate').max=todayKey();
+  }
+
+  function updateModeLabels(record){
+    const morningDone=!!record.morning, eveningDone=!!record.evening;
+    $('morningModeBtn').textContent=`Jutro – ${morningDone?'uneseno':'otvoreno'}`;
+    $('eveningModeBtn').textContent=`Večer – ${eveningDone?'unesena':'otvorena'}`;
+    $('morningTag').textContent=morningDone?'uneseno':'otvoreno';
+    $('eveningTag').textContent=eveningDone?'unesena':'otvorena';
+    $('morningTag').classList.toggle('done',morningDone);
+    $('eveningTag').classList.toggle('done',eveningDone);
   }
 
   function refreshUI(){
-    const records = loadRecords();
-    const r = records[today] || {};
+    updateDateHeader();
+    const records=loadRecords(),record=records[selectedDate]||{};
+    updateModeLabels(record);
 
-    if(r.morning){
-      $('morningStatus').textContent = `Jutro uneseno za ${displayDate(today)}.`;
-      statusClass($('morningStatus'), 'ok');
+    if(record.morning){
       $('morningFormWrap').classList.add('hidden');
       $('morningSavedWrap').classList.remove('hidden');
-      $('morningComment').textContent = r.morningComment || buildMorningComment(r.morning);
-      statusClass($('morningComment'), 'ok');
-    } else {
-      $('morningStatus').textContent = 'Jutro nije uneseno.';
-      statusClass($('morningStatus'), 'warn');
+      $('morningCommentWrap').classList.remove('hidden');
+      $('morningComment').textContent=record.morningComment||buildMorningComment(record.morning);
+    }else{
       $('morningFormWrap').classList.remove('hidden');
       $('morningSavedWrap').classList.add('hidden');
-      $('morningComment').textContent = 'Komentar nakon spremanja.';
-      statusClass($('morningComment'), '');
+      $('morningCommentWrap').classList.add('hidden');
+      resetMorningForm();
     }
 
-    if(r.evening){
-      $('eveningStatus').textContent = `Večer unesena za ${displayDate(today)}.`;
-      statusClass($('eveningStatus'), 'ok');
+    if(record.evening){
       $('eveningFormWrap').classList.add('hidden');
       $('eveningSavedWrap').classList.remove('hidden');
-      $('eveningComment').textContent = r.eveningComment || buildEveningComment(r.evening);
-      statusClass($('eveningComment'), 'ok');
-    } else {
-      $('eveningStatus').textContent = 'Večer nije unesena.';
-      statusClass($('eveningStatus'), 'warn');
+      $('eveningCommentWrap').classList.remove('hidden');
+      $('todaySummaryWrap').classList.remove('hidden');
+      $('eveningComment').textContent=record.eveningComment||buildEveningComment(record.evening);
+    }else{
       $('eveningFormWrap').classList.remove('hidden');
       $('eveningSavedWrap').classList.add('hidden');
-      $('eveningComment').textContent = 'Komentar nakon spremanja.';
-      statusClass($('eveningComment'), '');
+      $('eveningCommentWrap').classList.add('hidden');
+      $('todaySummaryWrap').classList.add('hidden');
+      resetEveningForm();
     }
 
-    buildYesterdaySummary();
-    buildTodaySummary();
+    const y=records[previousDay(selectedDate)];
+    if(mode==='morning'&&selectedDate===todayKey()){
+      $('yesterdayWrap').classList.remove('hidden');
+      if(!y){$('yesterdaySummary').textContent='Za jučer nema spremljenih podataka.';}
+      else{
+        const parts=[];
+        if(y.morning)parts.push(`Jutro: osjećaj ${y.morning.mEnergy}/10, san ${y.morning.mSleep}/100, BB ${y.morning.mBodyBattery}.`);
+        if(y.evening)parts.push(`Večer: osjećaj ${y.evening.eEnergy}/10, stres ${y.evening.eStress}, voda ${y.evening.eWater} L.`);
+        $('yesterdaySummary').textContent=parts.join(' ')||'Jučerašnji zapis nije potpun.';
+      }
+    }else $('yesterdayWrap').classList.add('hidden');
+
+    if(record.evening){
+      const parts=[];
+      if(record.morning)parts.push(`Jutro: osjećaj ${record.morning.mEnergy}/10, san ${record.morning.mSleep}/100, BB ${record.morning.mBodyBattery}.`);
+      parts.push(`Večer: osjećaj ${record.evening.eEnergy}/10, stres ${record.evening.eStress}, aktivnost ${record.evening.eActivity}, voda ${record.evening.eWater} L.`);
+      $('todaySummary').textContent=parts.join(' ');
+    }
     refreshPreview();
   }
 
-  function refreshPreview(){
-    const records = loadRecords();
-    const keys = Object.keys(records).sort().reverse();
-    const box = $('dataPreview');
-    if(!keys.length){
-      box.textContent = 'Nema podataka.';
-      return;
-    }
-    const html = keys.slice(0,7).map(k => {
-      const r = records[k];
-      const m = r.morning ? 'jutro ✓' : 'jutro –';
-      const e = r.evening ? 'večer ✓' : 'večer –';
-      return `<div class="kv"><span>${displayDate(k)}</span><strong>${m} · ${e}</strong></div>`;
-    }).join('');
-    box.innerHTML = html;
-  }
-
   function saveMorning(){
-    const records = loadRecords();
-    if(!records[today]) records[today] = {};
-    const data = getFormValues(Object.keys(defaults.morning));
-    if(!validateRequired(data, requiredMorning, 'Jutarnji unos')) return;
-    records[today].morning = data;
-    records[today].morningComment = buildMorningComment(data);
-    records[today].updatedAt = new Date().toISOString();
-    saveRecords(records);
-
-    resetMorningForm();
-    refreshUI();
+    const records=loadRecords(),data=getFormValues(Object.keys(defaults.morning));
+    if(!validate(data,requiredMorning,'Jutarnji unos'))return;
+    if(!records[selectedDate])records[selectedDate]={};
+    records[selectedDate].morning=data;
+    records[selectedDate].morningComment=buildMorningComment(data);
+    records[selectedDate].updatedAt=new Date().toISOString();
+    saveRecords(records);resetMorningForm();refreshUI();
   }
 
   function saveEvening(){
-    const records = loadRecords();
-    if(!records[today]) records[today] = {};
-    const data = getFormValues(Object.keys(defaults.evening));
-    if(!validateRequired(data, requiredEvening, 'Večernji unos')) return;
-    records[today].evening = data;
-    records[today].eveningComment = buildEveningComment(data);
-    records[today].updatedAt = new Date().toISOString();
-    saveRecords(records);
-
-    resetEveningForm();
-    refreshUI();
+    const records=loadRecords(),data=getFormValues(Object.keys(defaults.evening));
+    if(!validate(data,requiredEvening,'Večernji unos'))return;
+    if(!records[selectedDate])records[selectedDate]={};
+    records[selectedDate].evening=data;
+    records[selectedDate].eveningComment=buildEveningComment(data);
+    records[selectedDate].updatedAt=new Date().toISOString();
+    saveRecords(records);resetEveningForm();refreshUI();
   }
 
-  function editMorning(){
-    const records = loadRecords();
-    const r = records[today];
-    if(r && r.morning) setFormValues(r.morning);
-    $('morningFormWrap').classList.remove('hidden');
-    $('morningSavedWrap').classList.add('hidden');
+  function editMorning(){const r=loadRecords()[selectedDate];if(r?.morning)setFormValues(r.morning);$('morningFormWrap').classList.remove('hidden');$('morningSavedWrap').classList.add('hidden');}
+  function editEvening(){const r=loadRecords()[selectedDate];if(r?.evening)setFormValues(r.evening);$('eveningFormWrap').classList.remove('hidden');$('eveningSavedWrap').classList.add('hidden');}
+
+  function refreshPreview(){
+    const records=loadRecords(),keys=Object.keys(records).sort().reverse(),box=$('dataPreview');
+    if(!keys.length){box.textContent='Nema podataka.';return;}
+    box.innerHTML=keys.slice(0,7).map(k=>`<div class="kv"><span>${displayDate(k)}</span><strong>${records[k].morning?'jutro ✓':'jutro –'} · ${records[k].evening?'večer ✓':'večer –'}</strong></div>`).join('');
   }
 
-  function editEvening(){
-    const records = loadRecords();
-    const r = records[today];
-    if(r && r.evening) setFormValues(r.evening);
-    $('eveningFormWrap').classList.remove('hidden');
-    $('eveningSavedWrap').classList.add('hidden');
+  function chooseDate(key,manual=true){
+    if(key>todayKey())key=todayKey();
+    selectedDate=key;manualDateSelection=manual;refreshUI();
   }
 
-  function exportJson(){
-    const records = loadRecords();
-    const blob = new Blob([JSON.stringify(records, null, 2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `fenix-s-export-${today}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
+  function checkNewDay(){
+    const current=todayKey();
+    $('recordDate').max=current;
+    if(!manualDateSelection&&selectedDate!==current){selectedDate=current;setMode('morning');refreshUI();}
   }
 
-  function clearAll(){
-    const ok = confirm('Obrisati sve spremljene FENIX S podatke iz ovog preglednika?');
-    if(!ok) return;
-    localStorage.removeItem(STORAGE_KEY);
-    refreshUI();
-  }
+  function exportJson(){const data=JSON.stringify(loadRecords(),null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`fenix-s-export-${todayKey()}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
+  function clearAll(){if(confirm('Obrisati sve spremljene FENIX S podatke iz ovog preglednika?')){localStorage.removeItem(STORAGE_KEY);refreshUI();}}
 
-  $('bottomMorningBtn').addEventListener('click', () => showMode('morning'));
-  $('bottomEveningBtn').addEventListener('click', () => showMode('evening'));
-  $('saveMorningBtn').addEventListener('click', saveMorning);
-  $('saveEveningBtn').addEventListener('click', saveEvening);
-  $('resetMorningBtn').addEventListener('click', resetMorningForm);
-  $('resetEveningBtn').addEventListener('click', resetEveningForm);
-  $('editMorningBtn').addEventListener('click', editMorning);
-  $('editEveningBtn').addEventListener('click', editEvening);
-  $('exportBtn').addEventListener('click', exportJson);
-  $('clearBtn').addEventListener('click', clearAll);
+  $('recordDate').addEventListener('change',e=>chooseDate(e.target.value,true));
+  $('prevDayBtn').addEventListener('click',()=>chooseDate(previousDay(selectedDate),true));
+  $('todayBtn').addEventListener('click',()=>chooseDate(todayKey(),false));
+  $('morningModeBtn').addEventListener('click',()=>{setMode('morning');refreshUI();});
+  $('eveningModeBtn').addEventListener('click',()=>{setMode('evening');refreshUI();});
+  $('saveMorningBtn').addEventListener('click',saveMorning);
+  $('saveEveningBtn').addEventListener('click',saveEvening);
+  $('resetMorningBtn').addEventListener('click',resetMorningForm);
+  $('resetEveningBtn').addEventListener('click',resetEveningForm);
+  $('editMorningBtn').addEventListener('click',editMorning);
+  $('editEveningBtn').addEventListener('click',editEvening);
+  $('exportBtn').addEventListener('click',exportJson);
+  $('clearBtn').addEventListener('click',clearAll);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkNewDay();});
+  window.addEventListener('focus',checkNewDay);
+  setInterval(checkNewDay,60000);
 
-  resetMorningForm();
-  resetEveningForm();
-  const settings = loadSettings();
-  showMode(settings.mode || automaticMode());
-  refreshUI();
+  const settings=loadSettings();
+  mode=settings.mode||((new Date().getHours()>=4&&new Date().getHours()<14)?'morning':'evening');
+  setMode(mode);refreshUI();
 })();
 </script>
 </body>
-</html>
+</html
